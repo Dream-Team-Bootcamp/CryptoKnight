@@ -1,3 +1,7 @@
+# ATTENTION TEAM!!!!!!!!
+
+## we now start the server by typing `npm run dev`
+
 # Frank
 
 Welcome to CryptoKnight's Chatbot, Frank, your crypto enthusiast AI assistant! Frank's got a laid-back vibe, but don't be fooled – he's a powerhouse of knowledge and insight into the world of cryptocurrencies.
@@ -17,6 +21,8 @@ The styling for the application is done using styled-components, which offers a 
 
 ## Table of Contents
 
+- [ATTENTION TEAM!!!!!!!!](#attention-team)
+  - [we now start the server by typing `npm run dev`](#we-now-start-the-server-by-typing-npm-run-dev)
 - [Frank](#frank)
   - [Key Features](#key-features)
   - [Table of Contents](#table-of-contents)
