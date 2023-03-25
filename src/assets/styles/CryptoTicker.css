@@ -1,0 +1,118 @@
+/* Styles for the cryptocurrency ticker component */
+
+/* Styling for the outer ticker div */
+.crypto-ticker {
+  display: flex;
+  overflow-x: hidden;
+  font-family: Rubik;
+  font-weight: bolder;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Styling for the inner ticker div */
+.inner-ticker {
+  display: flex;
+  animation: scrolling 400s linear infinite; /* Animate the inner ticker using the scrolling keyframe animation */
+  flex-wrap: nowrap;
+}
+
+/* Styling for each coin div within the ticker */
+.coin {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Styling for the coin logo image within the coin div */
+.coin-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* Styling for the coin name span within the coin div */
+.coin-name {
+  margin-right: 10px;
+}
+
+/* Styling for the coin price span within the coin div when the price is up */
+.coin-price.green {
+  color: rgb(0, 255, 0);
+}
+
+/* Styling for the coin price span within the coin div when the price is down */
+.coin-price.red {
+  color: rgb(255, 0, 0);
+}
+
+/* Styling for the coin price change span within the coin div */
+.coin-change {
+  color: inherit;
+  margin-left: 10px;
+}
+
+/* Styling for the coin price change span within the coin div when the price is up */
+.coin-change.green {
+  color: rgb(0, 255, 0);
+}
+
+/* Styling for the coin price change span within the coin div when the price is down */
+.coin-change.red {
+  color: rgb(255, 0, 0);
+}
+
+
+.coin-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  z-index: 10;
+  white-space: nowrap;
+  display: none;
+  min-width: 200px;
+  max-height: 500px;
+  overflow-y: auto;
+  box-sizing: border-box; /* Add this line */
+}
+
+
+.coin-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0%;
+  border-style: solid;
+  border-width: 0 5px 5px 5px;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+  pointer-events: none;
+  height: 100px;
+
+}
+
+.coin-tooltip.visible {
+  display: block;
+}
+
+
+
+
+/* Keyframe animation for scrolling the ticker */
+@keyframes scrolling {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
