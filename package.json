@@ -17,7 +17,6 @@
     "coingecko-api": "^1.0.10",
     "concurrently": "^7.6.0",
     "envify": "^4.1.0",
-    "http-proxy-middleware": "^2.0.6",
     "https-browserify": "^1.0.0",
     "openai": "^3.2.1",
     "querystring-es3": "^0.2.1",
@@ -42,6 +41,9 @@
     "lambda": "netlify-lambda serve functions-build",
     "dev": "concurrently \"PORT=3001 npm run start\" \"npm run lambda\" \"netlify dev\""
   },
+
+  
+
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -61,6 +63,7 @@
     ]
   },
   "devDependencies": {
+    "http-proxy-middleware": "^2.0.6",
     "react-app-rewired": "^2.2.1"
   }
 }

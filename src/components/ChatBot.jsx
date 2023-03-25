@@ -63,13 +63,14 @@ const Chatbot = () => {
 
   const chatWithFrank = useCallback(async (messages) => {
     try {
-      const response = await axios.post('/api/chatWithFrank', { messages });
+      const response = await axios.post('/api/chatWithFrank', { messages }, { timeout: 60000 });
       return response.data.response;
     } catch (error) {
       console.error('Error communicating with the serverless function:', error);
       return 'You killed Frank, you monster!';
     }
   }, []);
+  
 
 
   const handleSubmit = useCallback(
