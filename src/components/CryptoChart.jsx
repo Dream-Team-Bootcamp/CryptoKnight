@@ -33,9 +33,9 @@ const CryptoChart = () => {
       {
         label: "Sales of the Week",
         data: [3, 6, 9],
-        backgroundColor: "aqua",
+        backgroundColor: "ivory",
         borderColor: "black",
-        pointBorderColor: "aqua",
+        pointBorderColor: "ivory",
         fill: true,
         tension: 0.3
       },
