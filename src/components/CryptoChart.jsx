@@ -1,4 +1,5 @@
 // import '../assets/styles/CryptoChart.css';
+import { Line } from "chart.js-2";
 import React from "react";
 import {
   Chart as ChartJS,
