@@ -6,21 +6,23 @@ import {
   CategoryScale, // x axis
   LinearScale, // y axis
   PointElement,
-  Legend,
-  Tooltip,
+  // Legend,
+  // Tooltip,
 } from "react-chartjs-2";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
-import { Line } from "react-chartjs-2";
+
 
 ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
   PointElement,
-  Legend,
-  Tooltip
+  // Legend,
+  // Tooltip
 );
+
+
 const CryptoChart = () => {
   // will be api call for chart data . test for now
 
