@@ -1,71 +1,52 @@
-// import '../assets/styles/CryptoChart.css';
-import { Line } from "chart.js-2";
 import React from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  LineElement,
-  CategoryScale, // x axis
-  LinearScale, // y axis
-  PointElement,
-  // Legend,
-  // Tooltip,
-} from "react-chartjs-2";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-
-
-ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
   PointElement,
-  // Legend,
-  // Tooltip
-);
+  Legend
+} from "chart.js/auto";
 
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
 
 const CryptoChart = () => {
-  // will be api call for chart data . test for now
-
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
-        label: "Sales of the Week",
-        data: [3, 6, 9],
-        backgroundColor: "ivory",
+        labels: "Sales of the Week",
+        data: [3, 6, 9, 9, 12, 12, 1],
+        backgroundColor: "aqua",
         borderColor: "black",
-        pointBorderColor: "ivory",
+        pointBorderColor: "aqua",
         fill: true,
-        tension: 0.3
+        tension: 0.3,
       },
     ],
   };
 
-  // options for legend and scales
   const options = {
     plugins: {
-      legend: true
+      legend: true,
     },
     scales: {
       y: {
-
-      }
-    }
-  }
+        min: 3,
+        max: 20,
+      },
+    },
+  };
 
   return (
     <div className="CryptoChart">
       <h1>Crypto Chart</h1>
-      <div style={
-        {width: "600px", height: "300px"}
-      }>
-      <Line 
-      data={data} 
-      options={options}
-      ></Line>
+      <div style={{ width: "600px", height: "300px" }}>
+        <Line data = {data} options = {options}/>
       </div>
     </div>
   );
 };
+
 export default CryptoChart;
