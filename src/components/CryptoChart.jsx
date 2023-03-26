@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Chart } from 'chart.js/auto';
 
 
+
 const CryptoChart = () => {
   const [coin, setCoin] = useState('bitcoin');
   const [timeInterval, setTimeInterval] = useState('1d');
@@ -55,10 +56,10 @@ const CryptoChart = () => {
         <option value="bitcoin">Bitcoin</option>
         <option value="ethereum">Ethereum</option>
         <option value="litecoin">Litecoin</option>
-        {/* add more coins as needed */}
+        
       </select>
-      
-      <canvas id="crypto-chart"></canvas>
+     
+      <canvas id="crypto-chart" height="400px" width="400px"></canvas>
     </div>
   );
 };
