@@ -50,7 +50,14 @@ const CryptoChart = () => {
 
   return (
     <div>
-
+      <label htmlFor="coin-select">Select a coin:</label>
+      <select id="coin-select" value={coin} onChange={handleCoinChange}>
+        <option value="bitcoin">Bitcoin</option>
+        <option value="ethereum">Ethereum</option>
+        <option value="litecoin">Litecoin</option>
+        {/* add more coins as needed */}
+      </select>
+      
       <canvas id="crypto-chart"></canvas>
     </div>
   );
