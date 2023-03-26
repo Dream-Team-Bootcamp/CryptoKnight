@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "chart.js/auto";
+import { bgcolor } from "@mui/system";
 
 const CryptoChart = () => {
   const [coin, setCoin] = useState("bitcoin");
