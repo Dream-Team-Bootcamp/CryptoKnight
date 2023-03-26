@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -6,7 +6,7 @@ import {
   LinearScale,
   PointElement
 } from "chart.js/auto";
-import { useEffect } from "react";
+
 
 ChartJS.register(CategoryScale, LinearScale, PointElement);
 
@@ -21,7 +21,7 @@ const CryptoChart = () => {
           label: "Crypto Historical Chart",
           data: [1, 4, 18, 4, 1, 24, 20],
           backgroundColor: [
-            'rgba(75, 192, 192, 0.5)'
+            'rgba(75, 192, 192, 0.6)'
         ],
           borderWidth: 4
         }
@@ -32,13 +32,13 @@ const CryptoChart = () => {
     chart()
   }, [])
   return (
-    <div className="CryptoChart">
+    <div className="Chart" style={{ width: "600px", height: "300px" }}>
       <h1>Crypto Chart</h1>
-      <div style={{ width: "600px", height: "300px" }}>
-        <Line data={chartData}></Line>
-      </div>
+      <Line data={chartData}/>
+      
     </div>
   );
 };
+
 
 export default CryptoChart;
