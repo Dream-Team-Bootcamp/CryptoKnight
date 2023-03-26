@@ -25,6 +25,7 @@
     "netlify-cli": "^13.2.1",
     "netlify-lambda": "^2.0.16",
     "node": "^19.8.1",
+    "nvm": "^0.0.4",
     "openai": "^3.2.1",
     "querystring-es3": "^0.2.1",
     "react": "^18.2.0",
