@@ -20,7 +20,9 @@ const CryptoChart = () => {
         {
           label: "Crypto Historical Chart",
           data: [1, 4, 18, 4, 1, 24, 20],
-          backgroundColor: "ivory",
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.5)'
+        ],
           borderWidth: 4
         }
       ]
