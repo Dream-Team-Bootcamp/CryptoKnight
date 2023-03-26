@@ -7,9 +7,8 @@ import ParticlesBg from './components/BackgroundAnimation';
 
 function App() {
   return (
-    <div className="App">
-      <ParticlesBg type="circle" bg={true} />
-      <div className="content" style={{ zIndex: 1 }}></div>
+   <div className="App">
+      <ParticlesBg />
       <CryptoTicker />
       <CryptoDisplay />
       <ChatBot />
