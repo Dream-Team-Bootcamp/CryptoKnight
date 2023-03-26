@@ -40,13 +40,16 @@
     "react-app-rewired": "^2.2.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "lambda": "netlify-lambda serve functions-build",
-    "dev": "concurrently \"PORT=3001 npm run start\" \"npm run lambda\" \"netlify dev\""
-  },
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lambda-build": "netlify-lambda build functions",
+    "dev": "npm run start",
+    "lambda-serve": "netlify-lambda serve functions",
+    "start-netlify": "npm run build && npm run lambda-build && npm run lambda-serve",
+    "build-netlify": "npm run build && npm run lambda-build"
+},
+
   "eslintConfig": {
     "extends": [
       "react-app",
