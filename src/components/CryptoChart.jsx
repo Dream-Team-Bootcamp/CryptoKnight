@@ -123,7 +123,7 @@ const CryptoChart = () => {
         <option value="max">All time</option>
       </select>
 
-      <canvas id="crypto-chart" height="400px" width="400px"></canvas>
+      <canvas id="crypto-chart" height={400} width={400}></canvas>
     </div>
   );
 };
