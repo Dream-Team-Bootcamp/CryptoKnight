@@ -1,44 +1,60 @@
-import React, { useState } from "react";
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement
-} from "chart.js/auto";
+import React, { useState, useEffect } from 'react';
+import { Chart } from 'chart.js/auto';
 
-
-ChartJS.register(CategoryScale, LinearScale, PointElement);
 
 const CryptoChart = () => {
-  const [chartData, setChartData] = useState({})
+  const [coin, setCoin] = useState('bitcoin');
+  const [timeInterval, setTimeInterval] = useState('1d');
+  const [chartData, setChartData] = useState({});
 
-  const chart = () => {
-    setChartData({
-      labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
-      datasets: [
-        {
-          label: "Crypto Historical Chart",
-          data: [3, 4, 18, 4, 1, 24, 20],
-          backgroundColor: [
-            'rgba(75, 192, 192, 0.6)'
-        ],
-          borderWidth: 4
-        }
-      ]
-    })
-  }
+  const handleCoinChange = (event) => {
+    setCoin(event.target.value);
+  };
+
+  const handleTimeIntervalChange = (event) => {
+    setTimeInterval(event.target.value);
+  };
+
   useEffect(() => {
-    chart()
-  }, [])
+    const fetchData = async () => {
+      const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=${timeInterval}`);
+      const data = await response.json();
+      const dates = data.prices.map((price) => new Date(price[0]).toLocaleDateString());
+      const prices = data.prices.map((price) => price[1]);
+      setChartData({
+        labels: dates,
+        datasets: [
+          {
+            label: `${coin.toUpperCase()} Price`,
+            data: prices,
+            fill: true,
+            backgroundColor: 'rgb(75, 192, 192)',
+            borderColor: 'red',
+            tension: 0.1,
+          },
+        ],
+      });
+    };
+    fetchData();
+  }, [coin, timeInterval]);
+
+  useEffect(() => {
+    const chart = new Chart('crypto-chart', {
+      type: 'line',
+      data: chartData,
+    });
+    return () => {
+      chart.destroy();
+    };
+  }, [chartData]);
+
   return (
-    <div className="CryptoChart" style={{ width: "600px", height: "300px" }}>
-      <h1>Crypto Chart</h1>
-      <Line data={chartData}/>
-      
+    <div>
+
+      <canvas id="crypto-chart"></canvas>
     </div>
   );
 };
 
-
 export default CryptoChart;
+

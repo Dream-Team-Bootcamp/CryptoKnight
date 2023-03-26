@@ -3,18 +3,23 @@ import "./App.css";
 import CryptoTicker from "./components/CryptoTicker";
 import ChatBot from "./components/ChatBot";
 import CryptoDisplay from "./components/CryptoDisplay";
-import ParticlesBg from "./components/BackgroundAnimation";
+// import ParticlesBg from "./components/BackgroundAnimation";
 import CryptoChart from "./components/CryptoChart";
 
 function App() {
   return (
     <div className="App">
+  
       
-      <ParticlesBg />
+      {/* <ParticlesBg /> */}
       <CryptoTicker />
       <CryptoDisplay />
       <ChatBot />
       <CryptoChart />
+      
+
+      
+      <h1>CryptoChart</h1>
     </div>
   );
 }
