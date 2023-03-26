@@ -1,50 +1,39 @@
-import '../assets/styles/CryptoChart.css';
-import React from "react";
+import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  LineElement,
   CategoryScale,
   LinearScale,
-  PointElement,
-  Legend
+  PointElement
 } from "chart.js/auto";
+import { useEffect } from "react";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement);
 
 const CryptoChart = () => {
-  const data = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    datasets: [
-      {
-        labels: "Sales of the Week",
-        data: [3, 6, 9, 9, 12, 12, 1],
-        backgroundColor: "aqua",
-        borderColor: "black",
-        pointBorderColor: "aqua",
-        fill: true,
-        tension: 0.3,
-      },
-    ],
-  };
+  const [chartData, setChartData] = useState({})
 
-  const options = {
-    plugins: {
-      legend: true,
-    },
-    scales: {
-      y: {
-        min: 3,
-        max: 20,
-      },
-    },
-  };
-
+  const chart = () => {
+    setChartData({
+      labels: ["Mon","Tue", "Wed", "Thur","Fri","Sat","Sun"],
+      datasets: [
+        {
+          label: "Crypto Historical Chart",
+          data: [1, 4, 18, 4, 1, 24, 20],
+          backgroundColor: "ivory",
+          borderWidth: 4
+        }
+      ]
+    })
+  }
+  useEffect(() => {
+    chart()
+  }, [])
   return (
     <div className="CryptoChart">
       <h1>Crypto Chart</h1>
       <div style={{ width: "600px", height: "300px" }}>
-        <Line data = {data} options = {options}/>
+        <Line data={chartData}></Line>
       </div>
     </div>
   );
