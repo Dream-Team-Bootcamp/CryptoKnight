@@ -53,9 +53,57 @@ const CryptoChart = () => {
     <div>
       <label htmlFor="coin-select">Select a coin:</label>
       <select id="coin-select" value={coin} onChange={handleCoinChange}>
-        <option value="bitcoin">Bitcoin</option>
-        <option value="ethereum">Ethereum</option>
-        <option value="litecoin">Litecoin</option>
+      <option value="bitcoin">Bitcoin</option>
+  <option value="ethereum">Ethereum</option>
+  <option value="tether">Tether</option>
+  <option value="binancecoin">Binance Coin</option>
+  <option value="cardano">Cardano</option>
+  <option value="dogecoin">Dogecoin</option>
+  <option value="xrp">XRP</option>
+  <option value="usd-coin">USD Coin</option>
+  <option value="polkadot">Polkadot</option>
+  <option value="bitcoin-cash">Bitcoin Cash</option>
+  <option value="uniswap">Uniswap</option>
+  <option value="litecoin">Litecoin</option>
+  <option value="chainlink">Chainlink</option>
+  <option value="solana">Solana</option>
+  <option value="stellar">Stellar</option>
+  <option value="matic-network">Polygon</option>
+  <option value="ethereum-classic">Ethereum Classic</option>
+  <option value="vechain">VeChain</option>
+  <option value="binance-usd">Binance USD</option>
+  <option value="filecoin">Filecoin</option>
+  <option value="theta-token">Theta Token</option>
+  <option value="tron">TRON</option>
+  <option value="wrapped-bitcoin">Wrapped Bitcoin</option>
+  <option value="terra-luna">Terra</option>
+  <option value="neo">NEO</option>
+  <option value="cosmos">Cosmos</option>
+  <option value="internet-computer">Internet Computer</option>
+  <option value="bitcoin-cash-sv">Bitcoin SV</option>
+  <option value="algorand">Algorand</option>
+  <option value="hedera-hashgraph">Hedera Hashgraph</option>
+  <option value="maker">Maker</option>
+  <option value="tezos">Tezos</option>
+  <option value="filecoin">Filecoin</option>
+  <option value="bitcoin-gold">Bitcoin Gold</option>
+  <option value="quant">Quant</option>
+  <option value="omisego">OMG Network</option>
+  <option value="waves">Waves</option>
+  <option value="zilliqa">Zilliqa</option>
+  <option value="chiliz">Chiliz</option>
+  <option value="siacoin">Siacoin</option>
+  <option value="pancakeswap">PancakeSwap</option>
+  <option value="decentraland">Decentraland</option>
+  <option value="helium">Helium</option>
+  <option value="dash">Dash</option>
+  <option value="yearn-finance">Yearn.finance</option>
+  <option value="elrond">Elrond</option>
+  <option value="omg">OMG Network</option>
+  <option value="ravencoin">Ravencoin</option>
+  <option value="avalanche">Avalanche</option>
+  <option value="nexo">NEXO</option>
+  <option value="loopring">Loopring</option>
         
       </select>
      
