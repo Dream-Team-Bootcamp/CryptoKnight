@@ -1,16 +1,17 @@
 [build]
   command = "npm run build"
-  functions = "functions"
+  functions = "functions-build"
   publish = "build"
 
 [dev]
   command = "npm run start"
-  functions = "functions-build"
+  functions = "functions"
   publish = "build"
   targetPort = 3001
-
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+base = "CryptoKnight"
