@@ -1,7 +1,6 @@
 // This file defines the Chatbot component, which is a chat interface that allows users to communicate with an AI-powered assistant called Frank.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BsFillChatDotsFill } from 'react-icons/bs'; // Importing an icon from the react-icons/bs library
-import { IoClose, IoChevronDown, IoChevronUp, IoExpand } from 'react-icons/io5'; // Importing icons from the react-icons/io5 library
 import styled from '@emotion/styled'; // Importing a styled-component library
 import { motion, AnimatePresence } from 'framer-motion'; // Importing animation libraries
 import axios from 'axios';
@@ -61,9 +60,10 @@ const Chatbot = () => {
   };
 
 
+
   const chatWithFrank = useCallback(async (messages) => {
     try {
-      const response = await axios.post('/api/chatWithFrank', { messages }, { timeout: 60000 });
+      const response = await axios.post('https://crypt0knight.netlify.app/.netlify/functions/chatWithFrank', { messages }, { timeout: 60000 });
       return response.data.response;
     } catch (error) {
       console.error('Error communicating with the serverless function:', error);
@@ -73,16 +73,24 @@ const Chatbot = () => {
   
 
 
+  // const chatWithFrank = useCallback(async (messages) => {
+  //   try {
+  //     const response = await axios.post('/api/chatWithFrank', { messages }, { timeout: 60000 });
+  //     return response.data.response;
+  //   } catch (error) {
+  //     console.error('Error communicating with the serverless function:', error);
+  //     return 'You killed Frank, you monster!';
+  //   }
+  // }, []);
+
+
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault(); // Prevent the default form submission behavior
-
       if (userInput.trim() === '') return; // If the user input is empty or just whitespace, do nothing
-
       sendMessage(userInput, 'user'); // Add the user's input as a new message with the role of 'user'
       setUserInput(''); // Clear the user input state variable
       setIsTyping(true); // Set the isTyping state variable to true
-
       const response = await chatWithFrank([
         ...messages,
         { role: 'user', content: userInput },
@@ -127,17 +135,10 @@ const Chatbot = () => {
           <Header>
             <ButtonContainer>
               <ControlButton onClick={handleMinimize} red>
-                <IoClose size={14} />
               </ControlButton>
               <ControlButton onClick={handleResize} yellow>
-                {chatSize === 'maximized' ? (
-                  <IoChevronUp size={14} />
-                ) : (
-                  <IoChevronDown size={14} />
-                )}
               </ControlButton>
               <ControlButton onClick={handleMaximize} green>
-                <IoExpand size={14} />
               </ControlButton>
             </ButtonContainer>
             <TypingStatus>

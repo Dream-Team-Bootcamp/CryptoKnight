@@ -1,8 +1,24 @@
-# ATTENTION TEAM!!!!!!!!
-
-## we now start the server by typing `npm run dev`
-
 # Frank
+
+![](./readmeImages/NirmeetNakamoto.png)
+
+
+## Table of Contents
+
+- [Frank](#frank)
+  - [Table of Contents](#table-of-contents)
+  - [Key Features](#key-features)
+  - [Overview](#overview)
+  - [Technologies and Dependencies](#technologies-and-dependencies)
+  - [Architecture and Components](#architecture-and-components)
+    - [ChatBot.jsx](#chatbotjsx)
+    - [CSS-in-JS Styling](#css-in-js-styling)
+    - [API Key Security](#api-key-security)
+    - [Proxy Configuration](#proxy-configuration)
+    - [Serverless Function](#serverless-function)
+  - [File Structure](#file-structure)
+  - [Message Journey](#message-journey)
+
 
 Welcome to CryptoKnight's Chatbot, Frank, your crypto enthusiast AI assistant! Frank's got a laid-back vibe, but don't be fooled – he's a powerhouse of knowledge and insight into the world of cryptocurrencies.
 
@@ -19,31 +35,13 @@ The ChatBot application consists of several components and files that work toget
 
 The styling for the application is done using styled-components, which offers a more dynamic approach to styling React components. The serverless back-end is built using an Express.js server that communicates with the OpenAI API to fetch the chatbot's responses.
 
-## Table of Contents
-
-- [ATTENTION TEAM!!!!!!!!](#attention-team)
-  - [we now start the server by typing `npm run dev`](#we-now-start-the-server-by-typing-npm-run-dev)
-- [Frank](#frank)
-  - [Key Features](#key-features)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Technologies and Dependencies](#technologies-and-dependencies)
-  - [Architecture and Components](#architecture-and-components)
-    - [ChatBot.jsx](#chatbotjsx)
-    - [CSS-in-JS Styling](#css-in-js-styling)
-    - [API Key Security](#api-key-security)
-    - [Proxy Configuration](#proxy-configuration)
-    - [Serverless Function](#serverless-function)
-  - [File Structure](#file-structure)
-  - [Message Journey](#message-journey)
-
 ## Overview
 
 Frank provides a seamless chatting experience with the power of GPT-3.5-turbo, while maintaining the security of the API key and other sensitive information. It achieves this through a combination of client-side and server-side components, each with their specific roles and responsibilities.
 
 ## Technologies and Dependencies
 
-Frank relies on the following technologies and dependencies:
+Depending on where he lives, Frank relies on the following technologies and dependencies:
 
 - node.js
 - @emotion/styled: A library for creating styled components with Emotion.
@@ -54,14 +52,14 @@ Frank relies on the following technologies and dependencies:
 - Netlify: A platform for hosting serverless functions.
 - Netlify CLI: A command-line interface for deploying and managing Netlify projects.
 - Netlify Dev: A local development server for Netlify functions.
-- Netlify Lambda: A tool for building and serving Netlify functions locally.
 - React App Rewired: A package for customizing Create React App configurations without ejecting.
 - HTTP Proxy Middleware: A package for creating proxy middleware.
 
 To install the necessary dependencies, I had to run the following commands:
 
-```npm install -g netlify-cli
-npm install -g netlify-lambda
+```npm install 
+npm install openai
+npm install -g netlify-cli
 npm install axios
 npm install --save-dev react-app-rewired
 npm install http-proxy-middleware

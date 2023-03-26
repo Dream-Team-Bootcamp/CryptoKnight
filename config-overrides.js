@@ -1,4 +1,4 @@
-module.exports = function override(config, env) {
+module.exports = function override(config) {
   // Locate the Webpack Dev Server options
   const devServerOptions = config.devServer;
 

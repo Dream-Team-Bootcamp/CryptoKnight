@@ -1,5 +1,3 @@
-/* Styles for the cryptocurrency ticker component */
-
 /* Styling for the outer ticker div */
 .crypto-ticker {
   display: flex;
@@ -7,9 +5,10 @@
   font-family: Rubik;
   font-weight: bolder;
   white-space: nowrap;
-  position: relative;
+  position: fixed;
   width: 100%;
   overflow: visible;
+  
 }
 
 /* Styling for the inner ticker div */
