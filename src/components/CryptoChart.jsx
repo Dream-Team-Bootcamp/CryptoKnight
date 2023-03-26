@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -15,11 +15,11 @@ const CryptoChart = () => {
 
   const chart = () => {
     setChartData({
-      labels: ["Mon","Tue", "Wed", "Thur","Fri","Sat","Sun"],
+      labels: ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
       datasets: [
         {
           label: "Crypto Historical Chart",
-          data: [1, 4, 18, 4, 1, 24, 20],
+          data: [3, 4, 18, 4, 1, 24, 20],
           backgroundColor: [
             'rgba(75, 192, 192, 0.6)'
         ],
@@ -32,7 +32,7 @@ const CryptoChart = () => {
     chart()
   }, [])
   return (
-    <div className="Chart" style={{ width: "600px", height: "300px" }}>
+    <div className="CryptoChart" style={{ width: "600px", height: "300px" }}>
       <h1>Crypto Chart</h1>
       <Line data={chartData}/>
       
