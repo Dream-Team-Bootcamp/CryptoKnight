@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api/posts',
     createProxyMiddleware({
-      target: 'http://cryptopanic.com',
+      target: 'https://cryptopanic.com',
       changeOrigin: true,
       onProxyRes: (proxyRes) => {
         proxyRes.headers['Access-Control-Allow-Origin'] = '*';
