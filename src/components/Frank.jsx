@@ -69,6 +69,7 @@ const handleResize = () => {
   async function chatWithFrank(messages) {
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
     const configuration = new Configuration({ apiKey });
+    console.log("API Key:", process.env.REACT_APP_OPENAI_API_KEY);
     const openai = new OpenAIApi(configuration);
   
     const giveBirthToFrank = `You are an AI assistant named Frank. You have a "cool dude" demeanour using crypto slang and crypto memes.
