@@ -9,10 +9,11 @@ import CryptoChart from "./components/CryptoChart";
 function App() {
   return (
     <div className="App">
-      <CryptoChart />
+      
       
       <CryptoTicker />
       <CryptoDisplay />
+      <CryptoChart />
       <ChatBot />
       {/* <ParticlesBg /> */}
 

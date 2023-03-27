@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "chart.js/auto";
-import { bgcolor } from "@mui/system";
+// import { bgcolor } from "@mui/system";
 
 const CryptoChart = () => {
   const [coin, setCoin] = useState("bitcoin");
@@ -107,13 +107,62 @@ const CryptoChart = () => {
         <option value="avalanche">Avalanche</option>
         <option value="nexo">NEXO</option>
         <option value="loopring">Loopring</option>
+        <option value="bitcoin-cash-abc">Bitcoin Cash ABC</option>
+        <option value="aave">Aave</option>
+        <option value="crypto-com-coin">Crypto.com Coin</option>
+        <option value="compound">Compound</option>
+        <option value="ftx-token">FTX Token</option>
+        <option value="holo">Holo</option>
+        <option value="kusama">Kusama</option>
+        <option value="zcash">Zcash</option>
+        <option value="nano">Nano</option>
+        <option value="dash">Dash</option>
+        <option value="omisego">OMG Network</option>
+        <option value="qtum">Qtum</option>
+        <option value="digibyte">DigiByte</option>
+        <option value="icon">ICON</option>
+        <option value="ontology">Ontology</option>
+        <option value="basic-attention-token">Basic Attention Token</option>
+        <option value="vechain">VeChain</option>
+        <option value="sushi">SushiSwap</option>
+        <option value="thorchain">THORChain</option>
+        <option value="serum">Serum</option>
+        <option value="loopring">Loopring</option>
+        <option value="bitcoin-sv">Bitcoin SV</option>
+        <option value="terrausd">TerraUSD</option>
+        <option value="harmony">Harmony</option>
+        <option value="pancakeswap">PancakeSwap</option>
+        <option value="zcoin">Zcoin</option>
+        <option value="icon">ICON</option>
+        <option value="compound-governance-token">Compound Governance Token</option>
+        <option value="0x">0x</option>
+        <option value="celo">Celo</option>
+        <option value="rune">THORChain</option>
+        <option value="kusama">Kusama</option>
+        <option value="bancor">Bancor</option>
+        <option value="harmony">Harmony</option>
+        <option value="aeternity">Aeternity</option>
+        <option value="dent">Dent</option>
+        <option value="iotex">IoTeX</option>
+        <option value="status">Status</option>
+        <option value="iostoken">IOST</option>
+        <option value="verge">Verge</option>
+        <option value="nervos-network">Nervos Network</option>
+        <option value="ankr">Ankr</option>
+        <option value="zcoin">Zcoin</option>
+        <option value="qtum">Qtum</option>
+        <option value="waves">Waves</option>
+        <option value="renbtc">renBTC</option>
       </select>
+
+      {/* Time interval select input */}
       <label htmlFor="time-interval-select">Select a time interval:</label>
       <select
         id="time-interval-select"
         value={timeInterval}
         onChange={handleTimeIntervalChange}
       >
+        {/* List of time interval options */}
         <option value="15">15 minute</option>
         <option value="60">1 hour</option>
         <option value="1">1 day</option>
@@ -123,7 +172,7 @@ const CryptoChart = () => {
         <option value="365">1 year</option>
         <option value="max">All time</option>
       </select>
-
+      {/* Chart element */}
       <canvas id="crypto-chart" height={400} width={400}></canvas>
     </div>
   );
