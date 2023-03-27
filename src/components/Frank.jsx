@@ -1,7 +1,6 @@
 // This file defines the Chatbot component, which is a chat interface that allows users to communicate with an AI-powered assistant called Frank.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BsFillChatDotsFill } from 'react-icons/bs'; // Importing an icon from the react-icons/bs library
-import { IoClose, IoChevronDown, IoChevronUp, IoExpand } from 'react-icons/io5'; // Importing icons from the react-icons/io5 library
 import styled from '@emotion/styled'; // Importing a styled-component library
 import { motion, AnimatePresence } from 'framer-motion'; // Importing animation libraries
 import axios from 'axios';
@@ -60,7 +59,6 @@ const Chatbot = () => {
     setUserInput(e.target.value);
   };
 
-
   const chatWithFrank = useCallback(async (messages) => {
     try {
       const response = await axios.post('/api/chatWithFrank', { messages }, { timeout: 60000 });
@@ -71,7 +69,6 @@ const Chatbot = () => {
     }
   }, []);
   
-
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -127,17 +124,14 @@ const Chatbot = () => {
           <Header>
             <ButtonContainer>
               <ControlButton onClick={handleMinimize} red>
-                <IoClose size={14} />
+               
               </ControlButton>
               <ControlButton onClick={handleResize} yellow>
-                {chatSize === 'maximized' ? (
-                  <IoChevronUp size={14} />
-                ) : (
-                  <IoChevronDown size={14} />
-                )}
+              
+              
               </ControlButton>
               <ControlButton onClick={handleMaximize} green>
-                <IoExpand size={14} />
+        
               </ControlButton>
             </ButtonContainer>
             <TypingStatus>
@@ -202,12 +196,13 @@ const ChatContainer = styled(motion.div)`
   right: ${({ size }) => (size === 'small' ? '-7px' : size === 'medium' ? '10%' : '0')};
   width: ${({ size }) => (size === 'small' ? '300px' : size === 'medium' ? '80%' : '100%')};
   height: ${({ size }) => (size === 'small' ? '400px' : size === 'medium' ? '80%' : '100%')};
-  background-color: #222;
+  background-color: rgba(34, 34, 34, 0.9); // Set the background-color to be 50% transparent
   border-radius: ${({ size }) => (size === 'small' ? '10px' : '0')};
   display: flex;
   flex-direction: column;
   overflow: hidden;
 `;
+
 
 // Define styled component for the header of the chatbot
 const Header = styled.header`
