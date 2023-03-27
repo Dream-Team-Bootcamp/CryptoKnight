@@ -31,14 +31,16 @@ const Chatbot = () => {
     setIsMinimized(!isMinimized);
   };
 
-  // A function that toggles the size of the chatbot component between small and medium
-  const handleResize = () => {
-    if (chatSize === 'small') {
-      setChatSize('medium');
-    } else if (chatSize === 'medium') {
-      setChatSize('small');
-    }
-  };
+ // A function that toggles the size of the chatbot component between small, medium, and maximized
+const handleResize = () => {
+  if (chatSize === 'small') {
+    setChatSize('medium');
+  } else if (chatSize === 'medium') {
+    setChatSize('small');
+  } else {
+    setChatSize('medium');
+  }
+};
 
   // A function that toggles the size of the chatbot component between medium and maximized
   const handleMaximize = () => {
@@ -196,12 +198,14 @@ const ChatContainer = styled(motion.div)`
   right: ${({ size }) => (size === 'small' ? '-7px' : size === 'medium' ? '10%' : '0')};
   width: ${({ size }) => (size === 'small' ? '300px' : size === 'medium' ? '80%' : '100%')};
   height: ${({ size }) => (size === 'small' ? '400px' : size === 'medium' ? '80%' : '100%')};
-  background-color: rgba(34, 34, 34, 0.9); // Set the background-color to be 50% transparent
+  background-color: rgba(34, 34, 34, 0.9);
   border-radius: ${({ size }) => (size === 'small' ? '10px' : '0')};
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  z-index: ${({ size }) => (size === 'maximized' ? '9999' : 'auto')}; 
 `;
+
 
 
 // Define styled component for the header of the chatbot
