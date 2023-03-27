@@ -67,7 +67,7 @@ const handleResize = () => {
   };
 
   async function chatWithFrank(messages) {
-    const apiKey = "sk-2Y...";
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
     const configuration = new Configuration({ apiKey });
     const openai = new OpenAIApi(configuration);
   
@@ -95,7 +95,7 @@ const handleResize = () => {
   
     try {
       const openAIResponse = await openai.createChatCompletion({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: messagesToSend,
       });
   

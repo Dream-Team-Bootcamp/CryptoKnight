@@ -63,7 +63,7 @@ const handleResize = () => {
   };
 
   async function chatWithFrank(messages) {
-    const apiKey = "sk-2Y...";
+    const apiKey = "sk-...";
     const configuration = new Configuration({ apiKey });
     const openai = new OpenAIApi(configuration);
   
