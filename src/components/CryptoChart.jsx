@@ -1,6 +1,10 @@
+// import dependencies and css
 import React, { useState, useEffect } from "react";
 import { Chart } from "chart.js/auto";
-// import { bgcolor } from "@mui/system";
+
+
+
+
 
 const CryptoChart = () => {
   const [coin, setCoin] = useState("bitcoin");
@@ -32,13 +36,16 @@ const CryptoChart = () => {
             label: `${coin.toUpperCase()} Price`,
             data: prices,
             fill: true,
-            backgroundColor: "rgb(75, 192, 192)",
-            borderColor: "red",
-            tension: 0.1,
+            backgroundColor: "black",
+            borderColor: "green",
+            tension: 0.4,
+            pointBorderWidth: 1,
+            pointBorderRadius: 1
           },
         ],
       });
     };
+    
     fetchData();
   }, [coin, timeInterval]);
 
@@ -172,8 +179,8 @@ const CryptoChart = () => {
         <option value="365">1 year</option>
         <option value="max">All time</option>
       </select>
-      {/* Chart element */}
-      <canvas id="crypto-chart" height={400} width={400}></canvas>
+      {/* Chart render to canvas. check canvas styling,,,*/}
+      <canvas id="crypto-chart"  style={{ fontSize: 3, backgroundColor: "black", border: '1px solid #ccc', boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)', padding: '1%', borderRadius: '5px', maxWidth: '60%'}}></canvas>
     </div>
   );
 };
