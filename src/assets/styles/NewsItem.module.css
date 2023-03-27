@@ -1,0 +1,676 @@
+
+.flags {
+    height: 64px;
+    width: 64px;
+}
+
+.newsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.newsOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* This section is for the styling of the newsfeed options container */
+
+.optionLabel {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+.newsOptionGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.newsOptionGroup:last-child {
+    flex-grow: 1;
+}
+
+.newsOptionChoices {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.newsOptionChoice {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.newsOptionChoice.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+/* End of newsfeed customization menu */
+
+/* Start of filters and regions customization menu */
+.filterAndRegions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+.kindsAndCurrencies {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Start of filters menu customization */
+.filterRow, .regionRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.filter,
+.region {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.filter:hover,
+.region:hover {
+    background-color: #f9f9f9;
+}
+
+.filters {
+    width: 20%;
+}
+
+.regions {
+    width: 80%;
+}
+
+.filterIcon {
+    font-size: 40px;
+}
+
+.filterLabel {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* End of regions customization menu */
+
+/* Start of the kinds and currencies section */
+/* Start of kinds menu customization */
+.kindRow,
+.currencyRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.kinds,
+.currencies {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.kind:hover,
+.currency:hover {
+    background-color: #f9f9f9;
+}
+
+/* kind item */
+.kind {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Currency item */
+.currency {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.currency.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.currencyIcon {
+    font-size: 20px;
+}
+
+.currencyName {
+    font-size: 16px;
+    color: #666;
+}
+
+.currencyCode {
+    font-size: 12px;
+    color: #999;
+}
+
+/* End of kinds and currencies section */
+
+.kindIcon {
+    font-size: 40px;
+}
+
+.kindLabel {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Currency name and symbol */
+.currencyInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.currencyName {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.currencySymbol {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+}
+
+/* Custom currency form */
+.customCurrencyForm {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 50%;
+}
+
+.customCurrencyInput {
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    width: 100%;
+}
+
+.customCurrencyButton {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0066cc;
+    color: #fff;
+    cursor: pointer;
+}
+
+.customCurrencyButton:hover {
+    background-color: #4CAF50;
+}
+
+
+/* End of the currencies menu customization */
+ /* End of newsfeed customization menu */
+
+
+
+/* This section is for the newsfeed items */
+.newsItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.newsItem {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.2s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+    .newsItem {
+        flex-direction: row;
+    }
+}
+
+.newsItem:hover {
+    transform: translateY(-5px);
+}
+
+.newsContent {
+    flex-grow: 1;
+}
+
+.newsTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: left; /* added */
+}
+.newsSubtext {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.newsUrl a {
+    font-size: 14px;
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.newsUrl a:hover {
+    text-decoration: underline;
+}
+
+.newsUrlIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+
+/* This section is for the newsfeed items */
+.currencyList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.currencyCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.newsDetails {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.newsDetails span {
+    margin-right: 5px;
+}
+
+.newsFeeditems {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.newsItems {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+/* This section is for the styling inside each news item */
+.newsItemRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+}
+
+.newsItemRow > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.newsItemRow > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.publishedDateTime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.newsItemRow > div:last-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.newsUrlIcon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.newsUrlIcon:hover {
+    cursor: pointer;
+}
+
+
+
+
+/* this section might be redundant */
+.currencyList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.currencyCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-self: stretch;
+}
+
+.newsItemRow .currencies {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.newsItemRow .currencies .currencyContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.newsItemRow .currencies .currencyContainer img {
+    width: 20px;
+    height: 20px;
+}
+
+.newsItemRow .currencies .currencyTitle {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.newsItemRow .currencies .currencyCode {
+    font-size: 14px;
+    color: #666;
+}
+
+.newsTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.newsDetails {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.newsDetails span {
+    margin-right: 5px;
+}
+
+.newsSubtext {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* this section is responsive media stuff */
+
+@media screen and (min-width: 768px) {
+    .newsItemRow > div:first-child {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .newsItemRow > div:first-child .newsTitle {
+        margin-bottom: 0;
+    }
+
+    .newsItemRow {
+        flex-direction: row;
+    }
+
+    .newsItemRow > div:last-child {
+        margin-top: 0;
+    }
+
+    .newsItemRow > div:nth-child(1) {
+        flex: 2;
+        gap: 20px;
+    }
+
+    .newsItemRow > div:nth-child(2) {
+        flex: 1;
+        gap: 10px;
+    }
+
+    .newsItemRow > div:nth-child(1) {
+        flex: 2;
+        gap: 20px;
+    }
+
+    .newsItemRow > div:nth-child(1) .newsTitle {
+        margin: 0;
+    }
+
+    .newsItemRow > div:nth-child(1) .newsDetails {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .newsItemRow > div:nth-child(1) .newsDetails span {
+        margin-right: 10px;
+    }
+
+    .newsItemRow > div:nth-child(1) .currencies {
+        margin-top: 10px;
+    }
+
+    .newsItemRow > div:nth-child(1) .currencies .currencyCard {
+        margin-right: 10px;
+    }
+
+    .newsItemRow > div:nth-child(1) .datePublished {
+        margin-top: 10px;
+    }
+
+    .newsItemRow > div:nth-child(2) {
+        flex: 1;
+        gap: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .newsItemRow > div:nth-child(2) .newsUrl {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .newsItemRow > div:nth-child(2) .newsUrlIcon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .newsItemRow > div:nth-child(2) .newsUrl a {
+        color: #0066cc;
+        text-decoration: none;
+        margin-left: 5px;
+        font-size: 14px;
+    }
+
+    .newsItemRow > div:nth-child(2) .newsUrl a:hover {
+        text-decoration: underline;
+    }
+
+    .newsItemRow > div:nth-child(2) .newsSource {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .newsItemRow > div:nth-child(3) {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+        align-items: center;
+    }
+
+    .newsItemRow > div:nth-child(3) span {
+        margin-right: 5px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .newsItemRow {
+        flex-direction: row;
+      align-items: flex-start; /* Add this line */
+    }
+    .newsItemRow > div:last-child {
+        margin-top: 0;
+        align-self: flex-start; /* Add this line */
+    }
+    .newsItemRow > div:nth-child(1) {
+        flex: 2;
+        align-self: flex-start; /* Add this line */
+    }
+    .newsItemRow > div:nth-child(2) {
+        flex: 1;
+        align-self: flex-start; /* Add this line */
+    }
+    .newsItemRow .currencies {
+        flex-direction: row;
+    }
+    .newsItemRow .currencies .currencyContainer {
+        gap: 10px;
+    }
+}
+
+
+/* This section is for the styling inside each news item */
+.currencyCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 10px; /* Change the font size to make cards smaller */
+    color: #666;
+    width: 60px; /* Adjust the width to make cards smaller */
+}
+
+.currencyTitle {
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.currencyCode {
+    font-size: 10px;
+}
+
+.newsItemRow {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+}
+
+.newsItemRow:hover {
+    transform: translateY(-5px);
+}
+
+.newsItemRow > div {
+    display: flex;
+}
+
+.newsItemRow > div:last-child {
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.currencyContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
