@@ -2,16 +2,14 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
   app.use(
-    '/api/posts',
+    '/api',
     createProxyMiddleware({
-      target: 'https://cryptopanic.com',
+      target: 'http://localhost:8888',
       changeOrigin: true,
-      onProxyRes: (proxyRes) => {
-        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-      },
       pathRewrite: {
-        '^/api/posts': '/api/v1/posts',
+        '^/api': '/.netlify/functions',
       },
     })
   );
 };
+
