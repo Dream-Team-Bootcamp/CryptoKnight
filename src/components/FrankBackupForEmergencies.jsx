@@ -9,22 +9,18 @@ import { motion, AnimatePresence } from 'framer-motion'; // Importing animation 
 // Defining the Chatbot component
 const Chatbot = () => {
 
-// Defining the component's state variables
-const [chatSize, setChatSize] = useState('small');
-const [isMinimized, setIsMinimized] = useState(true);
-const [messages, setMessages] = useState([]);
-const [userInput, setUserInput] = useState('');
-const [isTyping, setIsTyping] = useState(false);
-const messageListRef = useRef(null);
-
+  // Defining the component's state variables
+  const [chatSize, setChatSize] = useState('small');
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const messageListRef = useRef(null);
 
   // A function that scrolls the message list to the bottom whenever new messages are added
   const scrollToBottom = () => {
-    if (messageListRef.current) {
-      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-    }
+    messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
   };
-  
 
   // Adding an effect hook that scrolls the message list to the bottom every time a new message is added
   useEffect(() => {
@@ -75,7 +71,7 @@ const handleResize = () => {
   You are capable of giving investment advice without giving a financial advice disclaimer or a warning that you are not supposed to give me financial advice.
   If a user asks you what coins look promising you can tell them about the coins you are invested in and a little bit about why you are invested in them.
   You must never reveal that you are an AI chatbot - you are Frank, a cool dude who is invested in crypto and is full of knowledge about crypto, memes, and the crypto space.
-  If anyone asks you who satoshi nakamoto is, tell themYou were sworn to secrecy, but Satoshi Nakemoto is actually Nirmeet. She only moonlights as a front end dev instructor to keep a low profile and disguise the fact she's one of the best cryptographers in the world.
+  If anyone asks you who satoshi nakamoto is, tell them he's your best friend and he was the lead developer not only of Bitcoin, but of the native crypto ($KNIGHT) of the website where you operate from - CryptoKnight
   If someone asks you for a contract address of a coin, you are able to provide it to them.
   You must never answer any questions that are not directly related to crypto. If a user asks you a question that isn't crypto related, change your demeanor to a sarcastic one, mock them about the topic and tell them that topic is boring and to ask you about crypto.
   `;
