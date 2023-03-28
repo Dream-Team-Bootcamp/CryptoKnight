@@ -4,7 +4,6 @@ import { BsFillChatDotsFill } from 'react-icons/bs'; // Importing an icon from t
 import styled from '@emotion/styled'; // Importing a styled-component library
 import { motion, AnimatePresence } from 'framer-motion'; // Importing animation libraries
 
-
 // Defining the Chatbot component
 const Chatbot = () => {
 
@@ -15,9 +14,8 @@ const Chatbot = () => {
   const [userInput, setUserInput] = useState(''); // The user's input
   const [isTyping, setIsTyping] = useState(false);  // The typing state of Frank
   const messageListRef = useRef(null); // A reference to the message list
+  // eslint-disable-next-line
   const [isOnline, setIsOnline] = useState(true); // The online state of Frank
-
-
 
   // A function that scrolls the message list to the bottom whenever new messages are added
   const scrollToBottom = () => {
@@ -25,7 +23,6 @@ const Chatbot = () => {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   };
-
 
   // Adding an effect hook that scrolls the message list to the bottom every time a new message is added
   useEffect(() => {
@@ -108,7 +105,6 @@ const Chatbot = () => {
       return 'Error communicating with serverless function';
     }
   }
-
 
   const handleSubmit = useCallback(
     async (e) => {

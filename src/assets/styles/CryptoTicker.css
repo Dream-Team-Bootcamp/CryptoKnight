@@ -12,6 +12,13 @@
   overflow: visible;
 }
 
+.tooltip-value {
+  color: #4caf50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
 /* Styling for the inner ticker div */
 .inner-ticker {
   display: flex;
