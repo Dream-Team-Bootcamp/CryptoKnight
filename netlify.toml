@@ -1,16 +1,16 @@
 [build]
   command = "npm run build"
-  functions = "functions"
+  functions = "netlify/functions"
   publish = "build"
+  environment = { NODE_ENV = 'production' }
 
 [dev]
   command = "npm run start"
-  functions = "functions-build"
+  functions = "netlify/functions"
   publish = "build"
   targetPort = 3001
 
-
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/*"
+  to = "/index.html"
   status = 200
