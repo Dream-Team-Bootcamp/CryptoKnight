@@ -1,26 +1,73 @@
 
-.flags {
-    height: 64px;
-    width: 64px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+/* This section is for the styling of the newsfeed options container */
 
 .newsContainer {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    gap: 20px;
 }
 
-.newsOptions {
+.optionsRow {
     display: flex;
-    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.filterAndRegions {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.kindsAndCurrencies {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-/* This section is for the styling of the newsfeed options container */
+/* These are the next to be rendered */
+.newsOption {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+}
+
+.optionLabelContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
 
 .optionLabel {
     font-size: 18px;
@@ -28,21 +75,115 @@
     color: #333;
 }
 
-.newsOptionGroup {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-}
-
-.newsOptionGroup:last-child {
-    flex-grow: 1;
-}
-
 .newsOptionChoices {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter,
+.region {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+}
+
+.filter.selected,
+.region.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.filter:hover,
+.region:hover {
+    background-color: #f9f9f9;
+}
+
+
+
+.flag {
+    height: 64px;
+    width: 64px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.filterRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    width: 40%;
+}
+
+.regionRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
+    width: 60%;
+}
+
+.filterOptions,
+.regionOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.regionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.regionName {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+.regionList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsOptionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.newsOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.newsOptionGroup:last-child {
+    flex-grow: 1;
 }
 
 .newsOptionChoice {
@@ -57,82 +198,63 @@
     background-color: #0066cc;
     color: #fff;
 }
-/* End of newsfeed customization menu */
 
+/* End of options customization menu */
+/* ------------- End of currencies customization menu ------------- */
+/* ------------- End of regions customization menu ------------- */
 /* Start of filters and regions customization menu */
-.filterAndRegions {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 20px;
-}
 
-.kindsAndCurrencies {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 20px;
-}
 
-/* Start of filters menu customization */
-.filterRow, .regionRow {
+
+
+
+
+/* ------------ make Currency and region containers to make them consistent with each other. --------------- */
+/* Start of kinds and currencies section */
+
+.kindRow {
     display: flex;
     flex-direction: row;
     gap: 20px;
-}
-
-.filter,
-.region {
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
+    width: 40%;
 }
 
-.filter:hover,
-.region:hover {
-    background-color: #f9f9f9;
-}
-
-.filters {
-    width: 20%;
-}
-
-.regions {
-    width: 80%;
-}
-
-.filterIcon {
-    font-size: 40px;
-}
-
-.filterLabel {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333;
-    margin-top: 10px;
-}
-
-/* End of regions customization menu */
-
-/* Start of the kinds and currencies section */
-/* Start of kinds menu customization */
-.kindRow,
 .currencyRow {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
+    width: 60%;
 }
 
-.kinds,
+.kinds {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 40%;
+}
+
 .currencies {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    width: 60%;
+}
+
+.kindOptions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.currencyOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
 }
 
 .kind:hover,
@@ -140,10 +262,10 @@
     background-color: #f9f9f9;
 }
 
-/* kind item */
-.kind {
+/* kind and currency item */
+.kind, .currency {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     padding: 10px;
     border-radius: 5px;
@@ -152,68 +274,116 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
     background-color: #fff;
     transition: background-color 0.2s ease-in-out;
+    margin-bottom: 10px; /* Add this for spacing between grid rows */
 }
 
-/* Currency item */
-.currency {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-}
-
+.kind.selected,
 .currency.selected {
     background-color: #0066cc;
     color: #fff;
 }
 
-.currencyIcon {
-    font-size: 20px;
+.kindImage, .currencyImage {
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-bottom: 5px;
 }
 
-.currencyName {
+.kindLabel, .currencyName {
     font-size: 16px;
     color: #666;
 }
 
+.kindLabel {
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+.currenciesContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.currencyCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 10px; /* Change the font size to make cards smaller */
+    color: #666;
+    width: 60px; /* Adjust the width to make cards smaller */
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.currencyContainer {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.currencyContainer.selected {
+    background-color: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+}
+
 .currencyCode {
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.currencyName {
+    font-size: 12px;
+    color: #333;
+}
+
+.currencyList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.currencyList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.currencyCode, .currencySymbol {
     font-size: 12px;
     color: #999;
 }
 
 /* End of kinds and currencies section */
-
-.kindIcon {
-    font-size: 40px;
-}
-
-.kindLabel {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333;
-    margin-top: 10px;
-}
-
-/* Currency name and symbol */
-.currencyInfo {
-    display: flex;
-    flex-direction: column;
-}
-
-.currencyName {
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.currencySymbol {
-    font-size: 14px;
-    font-weight: 500;
-    color: #666;
-}
 
 /* Custom currency form */
 .customCurrencyForm {
@@ -221,7 +391,7 @@
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    width: 50%;
+    width: 100%;
 }
 
 .customCurrencyInput {
@@ -247,9 +417,42 @@
     background-color: #4CAF50;
 }
 
+/* Kinds and Currencies images */
+.coinImage {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    display: inline-block; /* Add this */
+    margin-right: 5px; /* Add this */
+}
 
+.billImage {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    display: inline-block; /* Add this */
+    margin-right: 5px; /* Add this */
+}
 /* End of the currencies menu customization */
+
+
+
+
+
+
+
+
+
+
+
+
+
  /* End of newsfeed customization menu */
+
 
 
 
@@ -294,8 +497,9 @@
     font-weight: 700;
     margin-bottom: 10px;
     color: #333;
-    text-align: left; /* added */
+    text-align: left;
 }
+
 .newsSubtext {
     font-size: 14px;
     color: #666;
@@ -317,6 +521,8 @@
     height: 20px;
     margin-right: 5px;
 }
+/* End of the newsfeed items */
+
 
 
 /* This section is for the newsfeed items */
@@ -359,6 +565,16 @@
     gap: 20px;
     flex-grow: 1;
 }
+
+
+
+
+
+
+
+
+
+
 
 /* This section is for the styling inside each news item */
 .newsItemRow {
@@ -480,8 +696,17 @@
     margin-bottom: 5px;
 }
 
-/* this section is responsive media stuff */
 
+
+
+
+
+
+
+
+
+
+/* this section is responsive media stuff */
 @media screen and (min-width: 768px) {
     .newsItemRow > div:first-child {
         flex-direction: column;
@@ -594,6 +819,14 @@
 }
 
 
+
+
+
+
+
+
+
+
 @media screen and (min-width: 768px) {
     .newsItemRow {
         flex-direction: row;
@@ -674,3 +907,691 @@
     align-items: center;
     gap: 5px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Start of the footer */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.footerLink {
+    color: #0066cc;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.footerLink:hover {
+    text-decoration: underline;
+}
+/* End of the footer */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.newsOption:hover {
+    color: #0066cc;
+}
+
+/* .currencyTilesContainer {
+    display: */
+
+
+.newsOption.selected,
+.newsOption:hover {
+        background-color: #0066cc;
+        color: #fff;
+}
+
+/* Filter options */
+.filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.filter label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+}
+
+.filter select {
+        font-size: 16px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+}
+
+/* Region options */
+.region {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.region label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+}
+
+.region img {
+        height: 30px;
+        width: auto;
+}
+
+/* Kind options */
+.kind {
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.kind label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.kind input {
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.kind .option {
+        font-size: 14px;
+        color: #666;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        transition: background-color 0.2s ease-in-out;
+}
+
+.kind .option:hover {
+    background-color: #f2f2f2;
+}
+
+.kind .selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+
+
+/* Currency options */
+.currency {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.currencyRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.currencyOptions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.currencyContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+    flex-basis: 100%;
+}
+
+.currencyContainer.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.coinImage {
+    height: 30px;
+}
+
+.billImage {
+    height: 20px;
+}
+
+.currencyCode {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.currencyName {
+    font-size: 12px;
+    color: #666;
+}
+
+.customCurrencyInput {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.customCurrencyButton {
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.customCurrencyButton:hover {
+    background-color: #0059b3;
+}
+
+.currency .option {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.currency .option:hover {
+    background-color: #f2f2f2;
+}
+
+.currency .selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.currency label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.currency .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+
+
+
+
+@media screen and (min-width: 768px) {
+    .newsFeedOptionsBar {
+        flex-direction: column;
+    }
+
+    .filterAndRegions {
+        flex-direction: row;
+    gap: 20px;
+    }
+
+    .kindsAndCurrencies {
+        flex-direction: row;
+        gap: 20px;
+    }
+}
+
+
+
+
+/* ---------- section2  ---------- */
+.optionsRow {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .newsFeedOptionsBar {
+        flex-direction: column;
+    }
+
+    .topRow {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        color: red;
+    }
+
+    .bottomRow {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filterAndRegions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-basis: 50%;
+    }
+
+    .kindsAndCurrencies {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-basis: 50%;
+    }
+
+    .filterContainer,
+    .regionContainer,
+    .kindsContainer,
+    .currenciesContainer {
+        flex-basis: 100%;
+    }
+}
+
+
+/* ---------- section4  ---------- */
+
+/* News feed options and styles for buttons etc here */
+
+.newsOption {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid #6d6d6d;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #1a1a1a;
+    transition: all 0.2s ease-in-out;
+    min-width: 100px;
+    flex-basis: 100%;
+}
+
+.optionLabelContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.optionLabel {
+    font-size: 20px;
+    font-weight: 600;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.optionChoices {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.newsOptionChoices {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.newsOptionGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    flex-basis: 50%;
+    width: 100%;
+}
+
+.newsOptionChoice {
+    font-size: 14px;
+    color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex-basis: calc(50% - 5px);
+    background-color: #3c3c3c;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+
+.newsOptionChoice:hover,
+.newsOptionChoice.selected {
+    background-color: #6d6d6d;
+    color: #f0f0f0;
+}
+
+.newsOptionChoice.selected {
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.filter .newsOptionGroup {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+    text-align: center;
+}
+
+.filter .newsOptionGroup.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.filter .newsOptionChoice {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+
+.filter .newsOptionChoice.selected {
+    color: #fff;
+}
+
+
+/* ---------- section6  ---------- */
+
+
+
+/* Css for region class */
+
+.region {
+    width: 100%;
+}
+
+.regionOptionsContainer {
+    width: 60%;
+}
+
+.regionRow {
+    display: flex;
+    flex-direction: row; /* Update to row */
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+
+.flags {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+.flag {
+    width: 64px;
+    height: 64px;
+}
+
+.newsOptionGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.newsOptionChoice {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.newsOptionChoice.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+
+
+
+/* Css for kinds class */
+
+.kind {
+    flex-basis: 40%;
+}
+
+.kindRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.kindOptions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.option {
+    font-size: 14px;
+    color: #666;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.option:hover {
+    background-color: #f2f2f2;
+}
+
+.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+/* section 7 */
+
+/* Css for currency class */
+
+.currency {
+    width: 100%;
+}
+
+.currencyRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.currencyOptions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.currencyContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+    flex-basis: 100%;
+}
+
+.currencyContainer.selected {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.coinImage {
+    height: 30px;
+}
+
+.billImage {
+    height: 20px;
+}
+
+.currencyCode {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.currencyName {
+    font-size: 12px;
+    color: #666;
+}
+.customCurrencyInput {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.customCurrencyButton {
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.customCurrencyButton:hover {
+    background-color: #0059b3;
+}
+
+
+
