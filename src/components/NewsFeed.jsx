@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../assets/styles/NewsItem.module.css';
+import styles from '../assets/styles/NewsFeed.module.css';
 import fetchCryptoPanicData from '../assets/functions/fetchNews.js';
+import classNames from 'classnames';
 import { ReactComponent as FlagEn } from '../assets/images/flags/gb.svg';
 import { ReactComponent as FlagDe } from '../assets/images/flags/de.svg';
 import { ReactComponent as FlagNl } from '../assets/images/flags/nl.svg';
@@ -11,8 +12,8 @@ import { ReactComponent as FlagPt } from '../assets/images/flags/pt.svg';
 import { ReactComponent as FlagRu } from '../assets/images/flags/ru.svg';
 
 const newsOptionChoices = {
-  filter: ['rising', 'hot', 'bullish', 'bearish', 'important', 'saved', 'new'],
-  currencies: ['BTC', 'ETH', 'USDT', 'BNB', 'USDC', 'XRP', 'ADA', 'STETH', 'DOGE', 'MATIC', 'BUSD', 'SOL', 'DOT', 'LTC', 'SHIB', 'TRX', 'AVAX', 'DAI', 'UNI', 'custom'],
+  filter: ['rising', 'hot', 'bullish', 'bearish', 'important', 'new'],
+  currencies: ['BTC', 'ETH', 'USDT', 'BNB', 'USDC', 'XRP', 'ADA','LINK','STETH','DOGE', 'MATIC', 'BUSD', 'SOL', 'DOT', 'LTC', 'SHIB', 'TRX', 'AVAX', 'DAI', 'UNI'],
   regions: [
     { code: 'en', name: 'English', flag: <FlagEn /> },
     { code: 'de', name: 'German', flag: <FlagDe /> },
@@ -25,6 +26,8 @@ const newsOptionChoices = {
   ],
   kind: ['news', 'media', 'all'],
 };
+
+// removed 'saved' fro newsOptionChoices.filter as it's not available on free account
 
 const NewsFeed = () => {
   const [newsItems, setNewsItems] = useState([]);
@@ -59,76 +62,97 @@ const handleCustomCurrencySubmit = (event) => {
 };
 
 // ---------- Start of section 2 ----------
+{/* <div className={`${styles.filterCardImage}`}>{newsOptionChoices.filterIcons[index]}</div> */}
 
-// Filters and regions section
 const renderFilter = () => (
-  <div className={styles.option}>
-    <span className={styles.optionLabel}>Filter:</span>
-    <div className={styles.optionChoices}>
-      {newsOptionChoices.filter.map((option, index) => (
-        <div key={index} className={`${styles.newsOptionGroup} ${newsOptions.filter === option ? styles.selected : ''}`} onClick={() => setNewsOptions({ ...newsOptions, filter: option })}>
-          <span>{option}</span>
+  <div className={`${styles.newsOption} ${styles.filter}`}>
+    <div className={`${styles.optionLabelContainer}`}>
+      <span className={`${styles.optionLabel}`}>Filter:</span>
+      <div className={`${styles.optionChoices} ${styles.filterRow} ${styles.filterCardsContainer}`}>
+        {newsOptionChoices.filter.map((option, index) => (
+        <div
+        key={option} className={`${styles.newsOptionGroup}
+        ${newsOptions.filter === option ? styles.selected : ''}`}
+        onClick={() => setNewsOptions({ ...newsOptions, filter: option })}>
+          <div className={`${styles.filterCard}`}>
+          <div className={`${styles.filterCardTitle}`}>
+            {option.charAt(0).toUpperCase() + option.slice(1)}
+          </div>
         </div>
+      </div>
       ))}
     </div>
   </div>
+  </div>
 );
+
 
 const renderRegions = () => (
-  <div className={`${styles.newsOption} ${styles.regions}`}>
-    <span className={styles.optionLabel}>Regions:</span>
-    <div className={styles.optionChoices}>
-      {newsOptionChoices.regions.map((region, index) => (
-        <div key={index} className={`${styles.option} ${styles.flags} ${newsOptions.regions.code === region.code ? styles.selected : ''}`} onClick={() => setNewsOptions({ ...newsOptions, regions: region })}>
-          {region.flag}
-          <span>{region.name}</span>
-        </div>
-      ))}
+  <div className={styles.newsOption}>
+    <div className={styles.optionLabelContainer}>
+      <span className={styles.optionLabel}>Regions:</span>
+    </div>
+    <div className={`${styles.regionOptionsContainer} ${styles.regionOptionGroup}`}>
+      <div className={styles.newsOptionChoices}>
+        {newsOptionChoices.regions.map((region) => (
+          <div
+          key={region.code} className={`${styles.newsOptionGroup}
+          ${styles.flags} ${newsOptions.regions.code === region.code ? styles.selected : ''}`}
+          onClick={() => setNewsOptions(
+            { ...newsOptions, regions: region })}>
+              {region.flag}
+              <span>
+                {region.code}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 );
 
-// Render kinds and currencies
-const renderKind = () => (
+
+const renderKinds = () => (
   <div className={styles.newsOption}>
-    <span className={styles.optionLabel}>Kind:</span>
-    <div className={styles.optionChoices}>
-      {newsOptionChoices.kind.map((option, index) => (
-        <button key={index} className={newsOptions.kind === option ? `${styles.option} ${styles.selected}` : styles.option} onClick={() => setNewsOptions({ ...newsOptions, kind: option })}>
-          {option}
-        </button>
-      ))}
+    <div className={styles.optionLabelContainer}>
+      <span className={styles.optionLabel}>Kind:</span>
+      <div className={styles.newsOptionChoices}>
+        {newsOptionChoices.kind.map((option, index) => (
+          <button key={index} className={`${styles.newsOptionGroup} ${newsOptions.kind === option ? styles.selected : ''}`} onClick={() => setNewsOptions({ ...newsOptions, kind: option })}>
+            {option}
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 );
 
 const renderCurrencies = () => {
-  const firstHalfCurrencies = newsOptionChoices.currencies.slice(0, Math.ceil(newsOptionChoices.currencies.length / 2));
-  const secondHalfCurrencies = newsOptionChoices.currencies.slice(Math.ceil(newsOptionChoices.currencies.length / 2));
-
   return (
-    <div className={styles.newsOption}>
-      <span className={styles.optionLabel}>Currencies:</span>
-      <div className={styles.optionChoices}>
-        <div className={styles.currencyOptions}>
-          {firstHalfCurrencies.map((option, index) => (
-            <button key={index} className={newsOptions.currencies === option ? `${styles.option} ${styles.selected}` : styles.option} onClick={() => setNewsOptions({ ...newsOptions, currencies: option })}>
-              {option}
-            </button>
-          ))}
-        </div>
-        <div className={styles.currencyOptions}>
-          {secondHalfCurrencies.map((option, index) => (
-            <button key={index} className={newsOptions.currencies === option ? `${styles.option} ${styles.selected}` : styles.option} onClick={() => setNewsOptions({ ...newsOptions, currencies: option })}>
-              {option}
-            </button>
-          ))}
-          {renderCustomCurrencyInput()}
+    <div className={classNames(styles.newsOption, styles.currency)}>
+      <div className={styles.optionLabelContainer}>
+        <span className={styles.optionLabel}>Currencies:</span>
+        <div className={classNames(styles.optionChoices, styles.currencyRow)}>
+          <div className={classNames(styles.currencyOptions, styles.currenciesContainer)}>
+            {newsOptionChoices.currencies.map((option, index) => (
+              <div key={index} className={classNames(styles.currencyContainer, {[styles.selected]: newsOptions.currencies.code === option.code})} onClick={() => setNewsOptions({ ...newsOptions, currencies: option })}>
+                <div className={styles.cardContainer}>
+                  <img src={option.image} alt={`${option.name} icon`} className={classNames({[styles.coinImage]: option.kind === 'crypto', [styles.billImage]: option.kind !== 'crypto'})} />
+                  <div>
+                    <span className={styles.currencyCode}>{option.code}</span>
+                    <span className={styles.currencyName}>{option.name}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {renderCustomCurrencyInput()}
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 const renderCustomCurrencyInput = () => (
   <div className={styles.newsOption}>
@@ -145,22 +169,27 @@ const renderCustomCurrencyInput = () => (
 
 const renderOptionsContainer = () => {
   return (
-    <div className={styles.newsContainer}>
-      <div className={styles.newsOptions}>
-
-        <div className={styles.filterAndRegions}>
-          <div className={`${styles.filters} ${styles.filterRow} ${styles.filter}`}>{renderFilter()}</div>
-          <div className={`${styles.regions} ${styles.regionRow} ${styles.region}`}>{renderRegions()}</div>
+    <section className={styles.pageContainer}>
+    <div className={styles.newsFeedOptionsBar}>
+        <div className={styles.filterRegionContainer}>
+          <div className={styles.filterContainer}>
+              {renderFilter()}
+          </div>
+          <div className={styles.regionContainer}>
+            {renderRegions()}
+          </div>
         </div>
-
-        <div className={styles.kindAndCurrencies}>
-          <div className={`${styles.kinds} ${styles.kindRow} ${styles.kind}`}>{renderKind()}</div>
-          <div className={`${styles.currencies} ${styles.currencyRow} ${styles.currency}`}>{renderCurrencies()}</div>
+        <div className={styles.kindsAndCurrenciesContainer}>
+          <div className={styles.kindsContainer}>
+            {renderKinds()}
+          </div>
+          <div className={styles.currenciesContainer}>
+            {renderCurrencies()}
+          </div>
         </div>
-
-      </div>
     </div>
-    );
+    </section>
+  );
 };
 
 
@@ -186,7 +215,7 @@ const renderNewsItem = (item) => {
 
   return (
     <div className='newsItem'>
-      {/* First Row - News Title */}>
+      {/* First Row - News Title */}
       <div className={styles.newsItemRow}>
         <h3 className={styles.newsTitle}>{item.title}</h3>
       </div>
