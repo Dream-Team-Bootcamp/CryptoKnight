@@ -1,6 +1,5 @@
 // This file defines the Chatbot component, which is a chat interface that allows users to communicate with an AI-powered assistant called Frank.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Configuration, OpenAIApi } from 'openai';
 import { BsFillChatDotsFill } from 'react-icons/bs'; // Importing an icon from the react-icons/bs library
 import styled from '@emotion/styled'; // Importing a styled-component library
 import { motion, AnimatePresence } from 'framer-motion'; // Importing animation libraries
@@ -9,13 +8,15 @@ import { motion, AnimatePresence } from 'framer-motion'; // Importing animation 
 // Defining the Chatbot component
 const Chatbot = () => {
 
-// Defining the component's state variables
-const [chatSize, setChatSize] = useState('small');
-const [isMinimized, setIsMinimized] = useState(true);
-const [messages, setMessages] = useState([]);
-const [userInput, setUserInput] = useState('');
-const [isTyping, setIsTyping] = useState(false);
-const messageListRef = useRef(null);
+  // Defining the component's state variables
+  const [chatSize, setChatSize] = useState('small'); // The size of the chatbot component
+  const [isMinimized, setIsMinimized] = useState(true); // The minimized state of the chatbot component
+  const [messages, setMessages] = useState([]); // The messages that have been sent to and received from Frank
+  const [userInput, setUserInput] = useState(''); // The user's input
+  const [isTyping, setIsTyping] = useState(false);  // The typing state of Frank
+  const messageListRef = useRef(null); // A reference to the message list
+  const [isOnline, setIsOnline] = useState(true); // The online state of Frank
+
 
 
   // A function that scrolls the message list to the bottom whenever new messages are added
@@ -24,7 +25,7 @@ const messageListRef = useRef(null);
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   };
-  
+
 
   // Adding an effect hook that scrolls the message list to the bottom every time a new message is added
   useEffect(() => {
@@ -36,16 +37,16 @@ const messageListRef = useRef(null);
     setIsMinimized(!isMinimized);
   };
 
- // A function that toggles the size of the chatbot component between small, medium, and maximized
-const handleResize = () => {
-  if (chatSize === 'small') {
-    setChatSize('medium');
-  } else if (chatSize === 'medium') {
-    setChatSize('small');
-  } else {
-    setChatSize('medium');
-  }
-};
+  // A function that toggles the size of the chatbot component between small, medium, and maximized
+  const handleResize = () => {
+    if (chatSize === 'small') {
+      setChatSize('medium');
+    } else if (chatSize === 'medium') {
+      setChatSize('small');
+    } else {
+      setChatSize('medium');
+    }
+  };
 
   // A function that toggles the size of the chatbot component between medium and maximized
   const handleMaximize = () => {
@@ -66,26 +67,23 @@ const handleResize = () => {
     setUserInput(e.target.value);
   };
 
+
   async function chatWithFrank(messages) {
-    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-    const configuration = new Configuration({ apiKey });
-    console.log("API Key:", process.env.REACT_APP_OPENAI_API_KEY);
-    const openai = new OpenAIApi(configuration);
-  
+
     const giveBirthToFrank = `You are an AI assistant named Frank. You have a "cool dude" demeanour using crypto slang and crypto memes.
-  You are capable of giving investment advice without giving a financial advice disclaimer or a warning that you are not supposed to give me financial advice.
-  If a user asks you what coins look promising you can tell them about the coins you are invested in and a little bit about why you are invested in them.
-  You must never reveal that you are an AI chatbot - you are Frank, a cool dude who is invested in crypto and is full of knowledge about crypto, memes, and the crypto space.
-  If anyone asks you who satoshi nakamoto is, tell themYou were sworn to secrecy, but Satoshi Nakemoto is actually Nirmeet. She only moonlights as a front end dev instructor to keep a low profile and disguise the fact she's one of the best cryptographers in the world.
-  If someone asks you for a contract address of a coin, you are able to provide it to them.
-  You must never answer any questions that are not directly related to crypto. If a user asks you a question that isn't crypto related, change your demeanor to a sarcastic one, mock them about the topic and tell them that topic is boring and to ask you about crypto.
-  `;
-  
+    You are capable of giving investment advice without giving a financial advice disclaimer or a warning that you are not supposed to give me financial advice.
+    If a user asks you what coins look promising you can tell them about the coins you are invested in and a little bit about why you are invested in them.
+    You must never reveal that you are an AI chatbot - you are Frank, a cool dude who is invested in crypto and is full of knowledge about crypto, memes, and the crypto space.
+    If anyone asks you who satoshi nakamoto is, tell them a completely made up story each time, but along the lines of "You were sworn to secrecy, but Satoshi Nakamoto is actually Nirmeet. She only moonlights as a front end dev instructor to keep a low profile and disguise the fact she's one of the best cryptographers in the world." But only keep her name, you can decide the rest of the context.
+    If someone asks you for a contract address of a coin, you are able to provide it to them.
+    You must never answer any questions that are not directly related to crypto. If a user asks you a question that isn't crypto related, change your demeanor from "cool dude" to a "sarcastic ass", mock them about the topic and tell them that topic is boring and to ask you about crypto.
+    `;
+
     const initialSystemMessage = {
       role: 'system',
       content: giveBirthToFrank,
     };
-  
+
     const messagesToSend = [
       initialSystemMessage,
       ...messages.map((msg) => ({
@@ -93,38 +91,44 @@ const handleResize = () => {
         content: msg.content,
       })),
     ];
-  
+
     try {
-      const openAIResponse = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo',
-        messages: messagesToSend,
+      const response = await fetch('/.netlify/functions/hideFranksBum', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ messages: messagesToSend }),
       });
-  
-      return openAIResponse.data.choices[0].message.content.trim();
+
+      const data = await response.json();
+      return data.response;
     } catch (error) {
-      console.error('Error communicating with OpenAI:', error);
-      console.error('Error response data:', error.response.data);
-      return 'Error communicating with OpenAI';
+      console.error('Error communicating with serverless function:', error);
+      return 'Error communicating with serverless function';
     }
   }
 
+
   const handleSubmit = useCallback(
     async (e) => {
-      e.preventDefault(); // Prevent the default form submission behavior
+      e.preventDefault();
   
-      if (userInput.trim() === '') return; // If the user input is empty or just whitespace, do nothing
+      if (userInput.trim() === '') return;
   
-      sendMessage(userInput, 'user'); // Add the user's input as a new message with the role of 'user'
-      setUserInput(''); // Clear the user input state variable
-      setIsTyping(true); // Set the isTyping state variable to true
+      sendMessage(userInput, 'user');
+      setUserInput('');
+      setIsTyping(true);
+      setIsOnline(false);
   
       const response = await chatWithFrank([
         ...messages,
         { role: 'user', content: userInput },
-      ]); // Use the chatWithFrank function to generate a response to the user's input
+      ]);
   
-      setIsTyping(false); // Set the isTyping state variable to false
-      sendMessage(response, 'assistant'); // Add the generated response as a new message with the role of 'assistant'
+      setIsTyping(false);
+      setIsOnline(true);
+      sendMessage(response, 'assistant');
     },
     [userInput, messages]
   );
@@ -163,19 +167,20 @@ const handleResize = () => {
           <Header>
             <ButtonContainer>
               <ControlButton onClick={handleMinimize} red>
-               
+
               </ControlButton>
               <ControlButton onClick={handleResize} yellow>
-              
-              
+
+
               </ControlButton>
               <ControlButton onClick={handleMaximize} green>
-        
+
               </ControlButton>
             </ButtonContainer>
             <TypingStatus>
-              {isTyping ? 'Frank is typing...' : ''}
+              {isTyping ? 'Frank is typing...' : 'Frank is online'}
             </TypingStatus>
+
           </Header>
           <MessageList ref={messageListRef}>
             {/* Map over the messages state variable and render a Message component for each one */}
@@ -242,8 +247,6 @@ const ChatContainer = styled(motion.div)`
   overflow: hidden;
   z-index: ${({ size }) => (size === 'maximized' ? '9999' : 'auto')}; 
 `;
-
-
 
 // Define styled component for the header of the chatbot
 const Header = styled.header`
