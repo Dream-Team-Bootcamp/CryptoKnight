@@ -18,6 +18,7 @@
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "envify": "^4.1.0",
+    "framer-motion": "^10.9.2",
     "http-proxy-middleware": "^2.0.6",
     "https-browserify": "^1.0.0",
     "netlify-cli": "^13.2.1",
