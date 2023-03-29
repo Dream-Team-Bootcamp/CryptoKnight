@@ -14,8 +14,9 @@ function App() {
   return (
     <Router>
       <BackgroundAnimation />
-      <NavBar />
       <CryptoTicker />
+      <NavBar />
+      
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/about" element={<CryptoChart />} />
