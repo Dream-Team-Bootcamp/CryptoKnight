@@ -242,3 +242,7 @@ The component consists of the following components:
 - The ticker scrolls horizontally with a smooth animation, and resets to the beginning when it reaches the end.
 - Clicking on a coin opens a new browser window with the CoinGecko page for that coin.
 - The component is styled with Emotion, a CSS-in-JS library.
+
+## Presentation 
+
+- https://docs.google.com/presentation/d/1SypBdTG3XrEGtQIIofpu9U8ghQ9FiXNC1TwkmHcziWI/edit#slide=id.p
