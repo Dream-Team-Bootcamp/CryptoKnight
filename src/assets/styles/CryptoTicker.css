@@ -1,6 +1,7 @@
 /* Styles for the cryptocurrency ticker component */
 
 /* Styling for the outer ticker div */
+
 .crypto-ticker {
   display: flex;
   overflow-x: hidden;
@@ -11,6 +12,15 @@
   width: 100%;
   overflow: visible;
 }
+
+
+
+.tooltip-value {
+  color: #4caf50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 
 /* Styling for the inner ticker div */
 .inner-ticker {

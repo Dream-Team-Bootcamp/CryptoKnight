@@ -2,10 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "chart.js/auto";
 
-
-
-
-
 const CryptoChart = () => {
   const [coin, setCoin] = useState("bitcoin");
   const [timeInterval, setTimeInterval] = useState("1d");
@@ -180,7 +176,7 @@ const CryptoChart = () => {
         <option value="max">All time</option>
       </select>
       {/* Chart render to canvas. check canvas styling,,,*/}
-      <canvas id="crypto-chart"  style={{ fontSize: 3, backgroundColor: "black", border: '1px solid #ccc', boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)', padding: '1%', borderRadius: '5px', maxWidth: '60%'}}></canvas>
+      <canvas id="crypto-chart" style={{ fontSize: 3, backgroundColor: "transparent", padding: '1%', borderRadius: '5px', maxWidth: '100%'}}></canvas>
     </div>
   );
 };
