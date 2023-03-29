@@ -1,0 +1,49 @@
+
+/* chart js labels and dropdowns styles */
+.time-int-select{
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    color: #4caf50;
+    background-color: black;
+  }
+  .time-int-label {
+    position: absolute;
+    top: 100px;
+    right: 200px;
+    color: #4caf50;
+  }
+
+  .coin-select {
+    position: absolute;
+    top: 100px;
+    right: 400px;
+    border-radius: 5%;
+    color: #4caf50;
+    background-color: black;
+
+  }
+
+ 
+ .coin-select-label {
+    position: absolute;
+    top: 100px;
+    right: 620px;
+    color: #4caf50;
+    
+
+
+ }
+.crypto-chart {
+    font-family: Arial, sans-serif;
+    border: #c51e1e 1px solid;
+    font-size: 10px;
+    color: #f3e8e8;
+    max-width: 50%;
+    max-height: 700px;
+  }
+  canvas{
+    width: 100% !important;
+    max-width: inherit;
+    height: auto !important;
+}
