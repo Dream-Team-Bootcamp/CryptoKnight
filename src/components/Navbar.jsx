@@ -7,7 +7,6 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f2029;
   padding: 1rem;
 `;
 
@@ -27,7 +26,7 @@ const NavLinks = styled(motion.ul)`
     right: -100%;
     width: 100%;
     height: calc(100vh - 70px);
-    background-color: #1f2029;
+    background-color: #00FF00;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +47,7 @@ const NavLinkStyle = styled(NavLink)`
   color: #fff;
   font-weight: bold;
   &.active {
-    color: #6c63ff;
+    color: #00FF00;
   }
 `;
 
@@ -57,10 +56,6 @@ const menuVariants = {
   open: { x: 0 },
 };
 
-const navLinksVariants = {
-  closed: { opacity: 0 },
-  open: { opacity: 1, transition: { staggerChildren: 0.2 } },
-};
 
 const navItemVariants = {
   closed: { opacity: 0, x: 100 },
@@ -109,7 +104,7 @@ const NavBar = () => {
               onClick={() => setIsOpen(false)}
             >
               <NavLinkStyle to="/about" isActive={() => location.pathname.startsWith("/about")}>
-                About
+                Chart
               </NavLinkStyle>
             </NavItem>
             <NavItem
@@ -129,7 +124,7 @@ const NavBar = () => {
             Home
           </NavLinkStyle>
           <NavLinkStyle to="/about" isActive={() => location.pathname.startsWith("/about")}>
-            About
+            Chart
           </NavLinkStyle>
           <NavLinkStyle to="/contact" isActive={() => location.pathname.startsWith("/contact")}>
             Contact
