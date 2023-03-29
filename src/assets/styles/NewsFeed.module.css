@@ -137,38 +137,23 @@
     gap: 5px;
 }
 
-/* to display the flags side by side, you can modify the .regionOptionsContainer style to set the flex-direction to row: */
-.regionOptionGroup {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
-}
 
 /* This style sets the display to flex and wrap the content. */
-.newsOptionGroup {
-    display: flex;
-    flex-wrap: wrap;
+.newsOption {
+    margin-bottom: 20px;
+    /* display: flex;
+    flex-wrap: wrap; */
     /* justify-content: center;
     align-items: center;
     cursor: pointer; */
 }
 
-.filterCard {
-    width: 48px;
-    height: 48px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    padding: 8px;
-    box-sizing: border-box;
+.optionLabelContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
 
 .filterCard:hover {
     transform: scale(1.05);
@@ -188,40 +173,6 @@
     height: 70%;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
-}
-
-.regionCardsContainer {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.flag {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-}
-
-.regionCard {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.regionCard:hover {
-    transform: scale(1.05);
-}
-
-.regionCardImage {
-    width: 50%;
-    height: 50%;
-    object-fit: contain;
 }
 
 .kind {
@@ -697,13 +648,17 @@
 
 .newsOptionGroup {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
     align-items: center;
-    flex-basis: calc(50% - 5px); /* Adjust this value to control the width of each group */
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
 }
 
-.newsOptionChoice {
+.newsOptionChoices {
     font-size: 14px;
     color: #666;
     padding: 5px 10px;
@@ -714,7 +669,7 @@
     width: 100%;
 }
 
-.newsOptionChoice.selected {
+.newsOptionChoices.selected {
     background-color: #0066cc;
     color: #fff;
 }

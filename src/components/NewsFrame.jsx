@@ -1,50 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import styles from '../assets/styles/NewsFeed.module.css';
-import fetchCryptoPanicData from '../assets/functions/fetchNews.js';
-import classNames from 'classnames';
-import { ReactComponent as FlagEn } from '../assets/images/flags/gb.svg';
-import { ReactComponent as FlagDe } from '../assets/images/flags/de.svg';
-import { ReactComponent as FlagNl } from '../assets/images/flags/nl.svg';
-import { ReactComponent as FlagEs } from '../assets/images/flags/es.svg';
-import { ReactComponent as FlagFr } from '../assets/images/flags/fr.svg';
-import { ReactComponent as FlagIt } from '../assets/images/flags/it.svg';
-import { ReactComponent as FlagPt } from '../assets/images/flags/pt.svg';
-import { ReactComponent as FlagRu } from '../assets/images/flags/ru.svg';
-import { motion, AnimateSharedLayout } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+// import styles from "../assets/styles/NewsFrame.module.css";
+import styles from "../assets/styles/News.module.css";
+import fetchCryptoPanicData from "../assets/functions/fetchNews.js";
+import classNames from "classnames";
+import styled from '@emotion/styled'; // Importing a styled-component library
+import { motion }  from "framer-motion";
+import DrawOptionsContainer from './OptionsContainer';
 
 const newsOptionChoices = {
-    filter: ['rising', 'hot', 'bullish', 'bearish', 'important', 'new'],
-    currencies: ['BTC', 'ETH', 'USDT', 'BNB', 'USDC', 'XRP', 'ADA', 'LINK', 'STETH', 'DOGE', 'MATIC', 'BUSD', 'SOL', 'DOT', 'LTC', 'SHIB', 'TRX', 'AVAX', 'DAI', 'UNI'],
+    filter: ["rising", "hot", "bullish", "bearish", "important", "new"],
+    currencies: ["BTC", "ETH", "USDT","BNB","USDC","XRP","ADA","LINK","STETH",
+    "DOGE","MATIC","BUSD","SOL","DOT","LTC","SHIB","TRX","AVAX","DAI","UNI",],
     regions: [
-        { code: 'en', name: 'English', flag: <FlagEn /> },
-        { code: 'de', name: 'German', flag: <FlagDe /> },
-        { code: 'nl', name: 'Dutch', flag: <FlagNl /> },
-        { code: 'es', name: 'Spanish', flag: <FlagEs /> },
-        { code: 'fr', name: 'French', flag: <FlagFr /> },
-        { code: 'it', name: 'Italian', flag: <FlagIt /> },
-        { code: 'pt', name: 'Portuguese', flag: <FlagPt /> },
-        { code: 'ru', name: 'Russian', flag: <FlagRu /> },
-    ],
-    kind: ['news', 'media', 'all'],
+    { code: "en", name: "English"},
+    { code: "de", name: "German" },
+    { code: "nl", name: "Dutch"},
+    { code: "es", name: "Spanish"},
+    { code: "fr", name: "French" },
+    { code: "it", name: "Italian"},
+    { code: "pt", name: "Portuguese"},
+    { code: "ru", name: "Russian"},
+],
+kind: ["news", "media", "all"],
 };
 
 const NewsFrame = () => {
     const [newsItems, setNewsItems] = useState([]);
     const [newsOptions, setNewsOptions] = useState({
-        filter: 'rising',
-        currencies: 'ETH',
-        regions: 'en',
-        kind: 'news',
+        filter: "hot",
+        kind: "news",
+        currencies: "BTC",
+        regions: "en",
     });
+
     const [customCurrency, setCustomCurrency] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetchCryptoPanicData(newsOptions);
-            setNewsItems(data);
-        };
+        const data = await fetchCryptoPanicData(newsOptions);
+        setNewsItems(data);
+    };
 
-        fetchData();
+    fetchData();
     }, [newsOptions]);
 
     const handleCustomCurrencyChange = (event) => {
@@ -58,254 +55,271 @@ const NewsFrame = () => {
         setCustomCurrency('');
     };
 
-    const renderFilterList = () => (
-        <motion.div className={`${styles.newsOption} ${styles.filter}`}>
-            <div className={`${styles.optionLabelContainer}`}>
-                <span className={`${styles.optionLabel}`}>Filter:</span>
-                <AnimateSharedLayout>
-                    <div className={`${styles.optionChoices} ${styles.filterRow} ${styles.filterCardsContainer}`}>
-                        {newsOptionChoices.filter.map((option, index) => (
-                            <motion.div
-                                key={option} className={`${styles.newsOptionGroup}
-                                ${newsOptions.filter === option ? styles.selected : ''}`}
-                                layoutId={option}
-                                onClick={() => setNewsOptions({ ...newsOptions, filter: option })}
-                            >
-                                <motion.div className={`${styles.filterCard}`}>
-                                    <motion.div className={`${styles.filterCardTitle}`}>
-                                        {option.charAt(0).toUpperCase() + option.slice(1)}
-                                    </motion.div>
-                                    {newsOptions.filter === option && (
-                                        <motion.div className={`${styles.filterCardImage}`} layoutId={`${option}-image`} />
-                                    )}
-                                </motion.div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </AnimateSharedLayout>
-        </motion.div>
-    );
-
-    const renderRegionList = () => (
-    <motion.div className={styles.newsOption}>
-        <div className={styles.optionLabelContainer}>
-            <span className={styles.optionLabel}>Regions:</span>
-            </div>
-            <div className={${styles.regionOptionsContainer} ${styles.regionOptionGroup}}>
-                <div className={styles.newsOptionChoices}>
-                    {newsOptionChoices.regions.map((region) => (
-                    <motion.div
-                    key={region.code} className={${styles.newsOptionGroup} ${styles.flags} ${newsOptions.regions.code === region.code ? styles.selected : ''}}
-                    layoutId={region.code}
-                    onClick={() => setNewsOptions({ ...newsOptions, regions: region })}
-                    >
-                        <motion.div className={styles.flagContainer} layoutId={${region.code}-flag}>
-                            {region.flag}
-                        </motion.div>
-                    <motion.div className={styles.regionCode} layoutId={${region.code}- code}>
-                        { region.code }
-                    </motion.div >
-                </motion.div >
-                ))}
-            </div >
-            </div >
-            </motion.div >
-);
-
-const renderKindsList = () => (
-    <motion.div className={styles.newsOption}>
-        <div className={styles.optionLabelContainer}>
-            <span className={styles.optionLabel}>Kind:</span>
-            <div className={styles.newsOptionChoices}>
-                {newsOptionChoices.kind.map((option, index) => (
-                    <motion.button
-                        key={index}
-                        className={${styles.newsOptionGroup} ${newsOptions.kind === option ? styles.selected : ''}}
-                onClick={() => setNewsOptions({ ...newsOptions, kind: option })}
-                layoutId={option}>
-                {option}
-            </motion.button>
-            ))}
-        </div>
-    </div>
-</motion.div >
-);
-
-const renderCurrencyList = () => {
-    return (
-        <motion.div className={classNames(styles.newsOption, styles.currency)}>
-            <div className={styles.optionLabelContainer}>
-                <span className={styles.optionLabel}>Currencies:</span>
-                <div className={classNames(styles.optionChoices, styles.currencyRow)}>
-                    <div className={classNames(styles.currencyOptions, styles.currenciesContainer)}>
-                        {newsOptionChoices.currencies.map((option, index) => (
-                            <motion.div
-                                key={index}
-                                className={classNames(styles.currencyContainer, {
-                                    [styles.selected]: newsOptions.currencies.code === option.code,
-                                })}
-                                onClick={() => setNewsOptions({ ...newsOptions, currencies: option })}
-                                layoutId={option.code}
-                            >
-                                <div className={styles.cardContainer}>
-                                    <img
-                                        src={option.image}
-                                        alt={${option.name} icon}
-                                    className={classNames({
-                                        [styles.coinImage]: option.kind === 'crypto',
-                                        [styles.billImage]: option.kind !== 'crypto',
-                                    })}
-/>
-                                    <div>
-                                        <span className={styles.currencyCode}>{option.code}</span>
-                                        <span className={styles.currencyName}>{option.name}</span>
-                                    </div>
-                            </motion.div>
-                        ))}
-                        {renderCustomCurrencyInput()}
-                    </div>
-                </div>
-            </div>
-        </motion.div>
-    );
-
-};
-
-const renderCustomCurrencyInput = () => (
-    <motion.div className={styles.newsOption}>
-        <form onSubmit={handleCustomCurrencySubmit}>
-            <motion.input
-                type="text"
-                placeholder="Enter custom currency"
-                className={styles.customCurrencyInput}
-                value={customCurrency}
-                onChange={handleCustomCurrencyChange}
-                layoutId="custom-currency-input"
-            />
-            <motion.button type="submit" className={styles.customCurrencyButton} layoutId="custom-currency-button">
-                Add
-            </motion.button>
-        </form>
-    </motion.div>
-);
-
-const renderOptionsContainer = () => {
-    return (
-        <motion.section
-            className={styles.pageContainer}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+    const renderNewsItem = (item) => {
+      // Reformat the date and time
+      const publishedDate = new Date(item.published_at);
+      const formattedDate = publishedDate.toLocaleDateString();
+      const formattedTime = publishedDate.toLocaleTimeString();
+  
+      return (
+        <motion.div
+          className="newsItem"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
         >
-            <div className={styles.newsFeedOptionsBar}>
-                <div className={styles.filterRegionContainer}>
-                    <div className={styles.filterContainer}>{renderFilterList()}</div>
-                    <div className={styles.regionContainer}>{renderRegionList()}</div>
-                </div>
-                <div className={styles.kindsAndCurrenciesContainer}>
-                    <div className={styles.kindsContainer}>{renderKindsList()}</div>
-                    <div className={styles.currenciesContainer}>{renderCurrencyList()}</div>
-                </div>
+          {/* First Row - News Title */}
+          <div className={styles.newsItemRow}>
+            <motion.h3 className={styles.newsTitle}>
+              {item.title}
+            </motion.h3>
+          </div>
+  
+          {/* Second Row - Currencies and Published Date */}
+          <div className={styles.newsItemRow}>
+            {renderNewsItemCurrencies(item)}
+  
+            <div className={styles.publishedAt}>
+              <p>Published at:</p>
+              <div className={styles.publishedDateTime}>
+                <p>{formattedDate}</p>
+                <p>{formattedTime}</p>
+              </div>
             </div>
-        </motion.section>
-    );
-};
-
-const renderNewsItemCurrencies = (item) => (
-    <div className={styles.newsCurrencies}>
+          </div>
+  
+          {/* Third Row - Type, Domain, Source, and Full Article Link */}
+          <div className={styles.newsItemRow}>
+            <motion.div
+              className={styles.newsDetails}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+            >
+              <p>Type: {item.kind}</p>
+              <p>Domain: {item.domain}</p>
+              <p>Source: {item.source.title}</p>
+            </motion.div>
+            <motion.div
+              className={styles.fullArticle}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+            >
+              <div className={styles.newsUrl}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.newsUrlButton}
+                >
+                  <div>
+                    <p>Full Article</p>
+                  </div>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      );
+    };
+  
+    const renderNewsItemCurrencies = (item) => (
+      <motion.div className={styles.newsCurrencies}>
         <p>Currencies:</p>
-        <div className={styles.currencyCards}>
-            {item.currencies.map((currency) => (
-                <div key={currency.code} className={styles.currencyCard}>
-                    <p>{currency.title}</p>
-                    <p>{currency.code}</p>
-                </div>
-            ))}
-        </div>
-    </div>
-);
+        <motion.div className={styles.currencyCards}>
+          {item.currencies.map((currency) => (
+            <motion.div key={currency.code} className={styles.currencyCard}>
+              <p>{currency.title}</p>
+              <p>{currency.code}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+      );
 
-const renderNewsItem = (item) => {
-    // Reformat the date and time
-    const publishedDate = new Date(item.published_at);
-    const formattedDate = publishedDate.toLocaleDateString();
-    const formattedTime = publishedDate.toLocaleTimeString();
+    const renderCurrencyList = () => {
+      const renderCustomCurrencyInput = () => (
+        <motion.div className={styles.newsOption}>
+          <form onSubmit={handleCustomCurrencySubmit}>
+            <input
+              type="text"
+              placeholder="Enter custom currency"
+              className={styles.customCurrencyInput}
+              value={customCurrency}
+              onChange={handleCustomCurrencyChange}
+            />
+            <motion.button type="submit" className={styles.customCurrencyButton} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              Add
+            </motion.button>
+          </form>
+        </motion.div>
+      );
+    
+      return (
+        <motion.div className={classNames(styles.newsOption, styles.currency)} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <motion.div className={styles.optionLabelContainer}>
+            <motion.span className={styles.optionLabel} whileHover={{ scale: 1.1 }}>
+              Currencies:
+            </motion.span>
+            <motion.div className={classNames(styles.optionChoices, styles.currencyRow)}>
+              <motion.div className={classNames(styles.currencyOptions, styles.currenciesContainer)}>
+                {newsOptionChoices.currencies.map((option, index) => (
+                  <motion.div
+                    key={index}
+                    className={classNames(styles.currencyContainer, {
+                      [styles.selected]: newsOptions.currencies.code === option.code,
+                    })}
+                    onClick={() =>
+                      setNewsOptions({ ...newsOptions, currencies: option })
+                    }
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.div className={styles.cardContainer}>
+                      <motion.img
+                        src={option.image}
+                        alt={`${option.name} icon`}
+                        className={classNames({
+                          [styles.coinImage]: option.kind === "crypto",
+                          [styles.billImage]: option.kind !== "crypto",
+                        })}
+                        whileHover={{ scale: 1.1 }}
+                      />
+                      <motion.div whileHover={{ scale: 1.1 }}>
+                        <motion.span className={styles.currencyCode}>{option.code}</motion.span>
+                        <motion.span className={styles.currencyName}>{option.name}</motion.span>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                ))}
+                {renderCustomCurrencyInput()}
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      );
+    };
 
-    return (
-        <div className='newsItem'>
-            {/* First Row - News Title */}
-            <div className={styles.newsItemRow}>
-                <h3 className={styles.newsTitle}>{item.title}</h3>
-            </div>
+    
 
-            {/* Second Row - Currencies and Published Date */}
-            <div className={styles.newsItemRow}>
-                {renderNewsItemCurrencies(item)}
-
-                <div className={styles.publishedAt}>
-                    <p>Published at:</p>
-                    <div className={styles.publishedDateTime}>
-                        <p>{formattedDate}</p>
-                        <p>{formattedTime}</p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Third Row - Type, Domain, Source, and Full Article Link */}
-            <div className={styles.newsItemRow}>
-                <div className={styles.newsDetails}>
-                    <p>Type: {item.kind}</p>
-                    <p>Domain: {item.domain}</p>
-                    <p>Source: {item.source.title}</p>
-                </div>
-                <div className={styles.fullArticle}>
-                    <div className={styles.newsUrl}>
-                        <motion.a
-                            href={item.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className={styles.newsUrlButton}
-                            layoutId={`full-article-${item.id}`}
-                        >
-                            <div>
-                                <p>Full Article</p>
-                            </div>
-                        </motion.a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-
-};
-
-return (
-    <motion.div
+  return (
+    <div className={styles.pageContainer}>
+      <div className={styles.menu}>
+        <DrawOptionsContainer />
+      </div>
+      <MainContainer
+        drag
+        dragConstraints={{ left: -100, right: 0, top: -100, bottom: 0 }}
         className={styles.newsContainer}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-    >
-        {renderOptionsContainer()}
-        <div className={styles.newsFeeditems}>
-            <div className={styles.newsItems}>
-                {newsItems &&
-                    newsItems.map((item) => (
-                        <motion.div
-                            key={item.id}
-                            className={styles.newsItem}
-                            layout
-                            transition={{ duration: 0.2 }}
-                        >
-                            {renderNewsItem(item)}
-                        </motion.div>
-                    ))}
-            </div>
+      >
+        <div className={styles.newsContainer}>
+          <div className={styles.newsItems}>
+            {newsItems && newsItems.map((item) => renderNewsItem(item))}
+          </div>
         </div>
-    </motion.div>
-);
+      </MainContainer>
+    </div>
+  );
 };
+
 
 export default NewsFrame;
 
+const MainContainer = styled(motion.div)`
+display:
+flex;
+    flex-direction: column;
+    min-height: 100vh;
+`;
 
+// Define styled component for the chatbot container
+const placehold = styled(motion.div)`
+  position: fixed;
+  // background-color: rgba(34, 34, 34, 0.9); 
+  bottom: ${({ size }) => (size === 'small' ? '0px' : size === 'medium' ? '10%' : '0')};
+  right: ${({ size }) => (size === 'small' ? '-7px' : size === 'medium' ? '10%' : '0')};
+  width: ${({ size }) => (size === 'small' ? '300px' : size === 'medium' ? '80%' : '100%')};
+  height: ${({ size }) => (size === 'small' ? '400px' : size === 'medium' ? '80%' : '100%')};
+  border-radius: ${({ size }) => (size === 'small' ? '10px' : '0')};
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: ${({ size }) => (size === 'maximized' ? '9999' : 'auto')}; 
+`;
+
+const NewsContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: auto;
+`;
+
+const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+`;
+
+const KindsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CurrenciesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CurrencyCardOption = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &.selected {
+    border-color: white;
+  }
+
+  &:hover {
+    border-color: white;
+  }
+
+  img {
+    height: 2rem;
+    margin-bottom: 0.5rem;
+  }
+`;
+
+const CustomCurrencyInput = styled.input`
+  margin-left: 8px;
+  padding: 4px;
+  font-size: 16px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid white;
+`;
+
+const CustomCurrencyButton = styled.button`
+  margin-left: 8px;
+  padding: 4px 8px;
+  font-size: 16px;
+  color: white;
+  background-color: #0048ba;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #003c8a;
+  }
+`;
