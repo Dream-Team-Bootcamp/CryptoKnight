@@ -72,6 +72,20 @@ const Hamburger = styled(motion.div)`
   }
 `;
 
+const ConnectWeb3Button = styled.button`
+  display: flex-box;
+  background-color: #50ae55;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #3c8f47;
+  }
+`;
+
 const menuVariants = {
   open: { opacity: 1, x: 0 },
   closed: { opacity: 0, x: "100%" },
@@ -100,26 +114,26 @@ const HamburgerLine = styled(motion.div)`
   height: 3px;
   background-color: #fff;
   &:nth-child(1) {
-    top: ${props => (props.isOpen ? "0" : "-10px")};
+    top: ${props => (props.isopen ? "0" : "-10px")};
   }
   &:nth-child(2) {
     top: 0;
   }
   &:nth-child(3) {
-    top: ${props => (props.isOpen ? "0" : "10px")};
+    top: ${props => (props.isopen ? "0" : "10px")};
   }
   position: absolute;
 `;
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isopen, setisopen] = React.useState(false);
 
   const handleLinkClick = () => {
-    setIsOpen(false);
+    setisopen(false);
   };
 
   const handleHamburgerClick = () => {
-    setIsOpen(!isOpen);
+    setisopen(!isopen);
   };
   return (
     <Nav>
@@ -130,10 +144,10 @@ const NavBar = () => {
         Menu
       </NavTitle>
       <AnimatePresence>
-        {isOpen && (
+        {isopen && (
           <NavLinks
             initial="closed"
-            animate={isOpen ? "open" : "closed"}
+            animate={isopen ? "open" : "closed"}
             exit="closed"
             variants={menuVariants}
           >
@@ -169,7 +183,9 @@ const NavBar = () => {
               whileHover={navItemVariants.hover}
               whileTap={{ scale: 0.9 }}
             >
-              <ConnectWeb3 />
+              <ConnectWeb3Button>
+                <ConnectWeb3 />
+              </ConnectWeb3Button>
             </NavItem>
           </NavLinks>
         )}
@@ -177,20 +193,21 @@ const NavBar = () => {
       <Hamburger
         onClick={handleHamburgerClick}
         initial={false}
-        animate={isOpen ? "open" : "closed"}
+        animate={isopen ? "open" : "closed"}
       >
         <HamburgerLine
-          variants={hamburgerLineVariants}
-          isOpen={isOpen}
-        />
-        <HamburgerLine
-          variants={hamburgerLineVariants}
-          isOpen={isOpen}
-        />
-        <HamburgerLine
-          variants={hamburgerLineVariants}
-          isOpen={isOpen}
-        />
+  variants={hamburgerLineVariants}
+  isopen={isopen ? "true" : "false"}
+/>
+<HamburgerLine
+  variants={hamburgerLineVariants}
+  isopen={isopen ? "true" : "false"}
+/>
+<HamburgerLine
+  variants={hamburgerLineVariants}
+  isopen={isopen ? "true" : "false"}
+/>
+
       </Hamburger>
     </Nav>
   );
