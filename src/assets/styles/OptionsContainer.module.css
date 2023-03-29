@@ -1,0 +1,117 @@
+/* styles.module.css */
+
+.pageContainer {
+    display: block;
+    min-height: 20vh;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(34, 34, 34, 0.9);
+    max-width: 1200px; /* adjust this value as per your requirement */
+  }
+
+  .topContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .bottomContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .currenciesContainer {
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .filtersContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .kindsContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .regionsContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+
+  
+  
+.currencyInput {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .currencyButton {
+    padding: 0.5rem 1rem;
+    background-color: #0072c6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .currencyButton:hover {
+    background-color: #005ea2;
+  }
+
+    
+  .currencyCards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .currencyCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    grid-row: auto / span 1;
+    grid-column: auto / span 1;
+  }

@@ -1,0 +1,64 @@
+/* to display the flags side by side, you can modify the .regionOptionsContainer style to set the flex-direction to row: */
+.regionOptionGroup {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+}
+
+.regionCardsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px;
+    overflow-x: scroll;
+    flex-wrap: wrap;
+}
+
+.regionCard {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.regionCardImage {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+.regionCardTitle {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.regionCard:hover {
+    transform: scale(1.05);
+}
+
+.regionCardSelected {
+    background-color: #0057ff;
+    color: #fff;
+}
+
+.flags {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+}
