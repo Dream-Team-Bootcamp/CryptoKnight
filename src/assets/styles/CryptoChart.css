@@ -47,3 +47,10 @@
     max-width: inherit;
     height: auto !important;
 }
+/* .crypto-chart-container {
+    background-color: transparent;
+    background-image: url(coin-logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  } */

@@ -36,6 +36,7 @@ const CryptoChart = () => {
       const prices = data.prices.map((price) => price[1]);
       setChartData({
         labels: labels,
+        fontColor: "red",
         datasets: [
           {
             label: `${coin.toUpperCase()} Price`,
@@ -46,11 +47,14 @@ const CryptoChart = () => {
             tension: 0.4,
             // pointBorderWidth: 1,
             // pointBorderRadius: 1
+            // bacgroundImage: `url(${coinLogoUrl})`
+          
           },
+        
         ],
       });
     };
-    
+  
     fetchData();
   }, [coin, timeInterval]);
 
