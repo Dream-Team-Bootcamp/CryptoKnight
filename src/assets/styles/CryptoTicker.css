@@ -1,3 +1,6 @@
+/* Styles for the cryptocurrency ticker component */
+
+/* Styling for the outer ticker div */
 .crypto-ticker {
   display: flex;
   overflow-x: hidden;
