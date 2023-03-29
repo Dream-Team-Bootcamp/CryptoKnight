@@ -1,7 +1,3 @@
-# ATTENTION TEAM!!!!!!!!
-
-## we now start the server by typing `npm run dev`
-
 # Frank
 
 Welcome to CryptoKnight's Chatbot, Frank, your crypto enthusiast AI assistant! Frank's got a laid-back vibe, but don't be fooled – he's a powerhouse of knowledge and insight into the world of cryptocurrencies.
@@ -21,8 +17,6 @@ The styling for the application is done using styled-components, which offers a 
 
 ## Table of Contents
 
-- [ATTENTION TEAM!!!!!!!!](#attention-team)
-  - [we now start the server by typing `npm run dev`](#we-now-start-the-server-by-typing-npm-run-dev)
 - [Frank](#frank)
   - [Key Features](#key-features)
   - [Table of Contents](#table-of-contents)
@@ -36,6 +30,14 @@ The styling for the application is done using styled-components, which offers a 
     - [Serverless Function](#serverless-function)
   - [File Structure](#file-structure)
   - [Message Journey](#message-journey)
+- [CryptoTicker React Component](#cryptoticker-react-component)
+  - [Table of Contents](#table-of-contents-1)
+  - [Overview](#overview-1)
+  - [Technologies Used](#technologies-used)
+  - [API Calls Used](#api-calls-used)
+  - [Styling](#styling)
+  - [Architecture and Components](#architecture-and-components-1)
+  - [Key Features](#key-features-1)
 
 ## Overview
 
@@ -137,3 +139,103 @@ Frank relies on the following files and directories:
 6. The `chatWithFrank` function in `ChatBot.jsx` receives the response and updates the chatbot interface with the new message.
 
 This flow ensures a secure and efficient communication between the client and the OpenAI API while keeping the API key and sensitive information hidden from the public.
+
+
+# CryptoTicker React Component
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Technologies Used](#technologies-used)
+- [API Calls Used](#api-calls-used)
+- [Styling](#styling)
+- [Architecture and Components](#architecture-and-components)
+- [Key Features](#key-features)
+
+## Overview
+
+CryptoTicker is a React component that displays a ticker of the top 100 cryptocurrencies by market capitalization, with real-time data on their price, price change percentage, and market cap. When the user hovers over a coin, a tooltip with more detailed information on the coin's market performance appears.
+
+## Technologies Used
+
+- React
+- Framer Motion
+- Emotion (CSS-in-JS library)
+
+## API Calls Used
+
+The component fetches data from the [CoinGecko API](https://www.coingecko.com/api/documentations/v3), specifically the `/coins/markets` endpoint with the following query parameters:
+
+- `vs_currency=usd`: Get prices in USD.
+- `order=market_cap_desc`: Order coins by market capitalization.
+- `per_page=100`: Return the top 100 coins by market cap.
+- `page=1`: Return the first page of results.
+- `sparkline=false`: Do not include sparkline data.
+
+The component updates its data every minute with a new API call.
+
+## Styling
+
+The component uses Emotion, a CSS-in-JS library, to style its components. It includes the following styled components:
+
+- `TickerContainer`: Styles the container for the entire ticker.
+- `InnerTicker`: Styles the inner container for the ticker.
+- `CoinsContainer`: Styles the container for the individual coins.
+- `Coin`: Styles the container for each coin.
+- `CoinLogo`: Styles the logo for each coin.
+- `CoinName`: Styles the name of each coin.
+- `CoinPrice`: Styles the price of each coin, with a color that depends on whether the price is up or down.
+- `CoinPercentage`: Styles the percentage change in price of each coin, with a color that depends on whether the price is up or down.
+- `CoinTooltip`: Styles the tooltip that appears when the user hovers over a coin.
+
+The `CoinTooltip` component uses Framer Motion to animate its appearance and disappearance.
+
+## Architecture and Components
+
+The component consists of the following components:
+
+- `CryptoTicker`: The main component that displays the ticker and manages the data and state. It includes the following functions:
+  - `fetchCoins`: A function that fetches the data from the CoinGecko API and updates the component state with the new data.
+  - `isPriceUp`: A function that returns a Boolean value indicating whether a coin's price is up or down.
+  - `formatPrice`: A function that formats a coin's price as a string with two decimal places for prices over 1 USD and six decimal places for prices under 1 USD.
+  - `openCoinChart`: A function that opens a new browser window with the CoinGecko page for a given coin.
+  - `handleMouseEnter`: A function that sets the active coin to the coin that the user is hovering over and positions the tooltip.
+  - `handleMouseLeave`: A function that sets the active coin to `null` when the user stops hovering over a coin.
+  - `tooltipAnimation`: An object that defines the animation for the tooltip component.
+  - ```mermaid
+        graph LR
+          A[User hovers over coin] --> B(CoinTooltip appears)
+          B --> C(fetchCoins function is called to retrieve data from CoinGecko API)
+          C --> D(API returns data)
+          D --> E(fetchCoins updates state with new data)
+          E --> F(Updated data is rendered to CoinsContainer)
+          E --> G(Data is saved to local storage)
+          E --> H(Last updated time is saved to local storage)
+          E --> I(Next fetch time is saved to local storage)
+          E --> J(If there is an error, error message is saved to local storage)
+          K[User clicks on coin] --> L(openCoinChart function is called)
+          L --> M(New browser window is opened with CoinGecko page for selected coin)
+          N[User views ticker] --> O(fetchCoins function is called to retrieve data from CoinGecko API)
+          O --> P(API returns data)
+          P --> Q(fetchCoins updates state with new data)
+          Q --> R(Updated data is rendered to CoinsContainer)
+          Q --> S(Data is saved to local storage)
+          Q --> T(Last updated time is saved to local storage)
+          Q --> U(Next fetch time is saved to local storage)
+          Q --> V(If there is an error, error message is saved to local storage)
+```
+
+## Key Features
+
+- Displays the top 100 cryptocurrencies by market capitalization.
+- Shows real-time data on each coin's price, price change percentage, and market cap.
+- Updates its data every minute with a new API call.
+- Displays a tooltip with more detailed information on a coin's market performance when the user hovers over a coin.
+- The tooltip includes data on the coin's market cap, total volume, 24-hour high and low, 24-hour open and close prices, market cap rank, circulating supply, total supply, max supply, all-time high (ATH), ATH date, all-time low (ATL), ATL date, market cap change in the last 24 hours, ATH change percentage in the last 24 hours, ATL change percentage in the last 24 hours, and last updated time.
+- The tooltip appears and disappears with an animation.
+- The ticker scrolls horizontally with a smooth animation, and resets to the beginning when it reaches the end.
+- Clicking on a coin opens a new browser window with the CoinGecko page for that coin.
+- The component is styled with Emotion, a CSS-in-JS library.
+
+
+
