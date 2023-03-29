@@ -1,29 +1,40 @@
-import React from 'react';
-import './App.css';
-import CryptoTicker from './components/CryptoTicker';
-import BackgroundAnimation from './components/BackgroundAnimation';
-import Frank from './components/Frank';
-import NavBar from './components/Navbar';
-// import Home from './components/Placeholder1';
-import CryptoChart from './components/CryptoChart';
-// import NewsFrame from './components/NewsFrame';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import "./App.css";
+import CryptoTicker from "./components/CryptoTicker";
+import BackgroundAnimation from "./components/BackgroundAnimation";
+import Frank from "./components/Frank";
+import NavBar from "./components/Navbar";
+import CryptoChart from "./components/CryptoChart";
+import Contact from "./components/Placeholder3";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import { arbitrum, mainnet, polygon } from 'wagmi/chains';
+
+const chains = [arbitrum, mainnet, polygon];
+const projectId = process.env.REACT_APP_PROJECT_ID
+
+const { provider } = configureChains(chains, [w3mProvider({ projectId })]);
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  provider
+});
+const ethereumClient = new EthereumClient(wagmiClient, chains);
 
 function App() {
   return (
     <Router>
-      <BackgroundAnimation />
-      <CryptoTicker />
-      <NavBar />
-      
-      <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/about" element={<CryptoChart />} />
-        {/* <Route path="/News" element={<NewsFrame />} /> */}
-      </Routes>
-      <Frank />
-      
-      {/* <CryptoChart /> */}
+      <WagmiConfig client={wagmiClient}>
+        <BackgroundAnimation />
+        <CryptoTicker />
+        <NavBar projectId={projectId} ethereumClient={ethereumClient} />
+        <Routes>
+          <Route path="/about" element={<CryptoChart />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Frank />
+      </WagmiConfig>
     </Router>
   );
 }
