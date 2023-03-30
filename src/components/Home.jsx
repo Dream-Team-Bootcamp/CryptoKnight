@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 import CryptoKnight from "../assets/images/cryptoknight.webp";
 import styled from "@emotion/styled";
 
-const Container = styled.div`
+const ContainerHomePage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 `;
 
-const Image = styled(motion.img)`
+const ImageHomePage = styled(motion.img)`
   max-width: 100%;
   max-height: 100%;
   z-index: 0;
@@ -48,14 +48,14 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      <Image
+    <ContainerHomePage>
+      <ImageHomePage
         src={CryptoKnight}
         alt="CryptoKnight"
         animate={animations[animation]}
         onClick={handleAnimation}
       />
-    </Container>
+    </ContainerHomePage>
   );
 };
 

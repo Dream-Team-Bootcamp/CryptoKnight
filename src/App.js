@@ -11,7 +11,7 @@ import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { arbitrum, mainnet, polygon } from 'wagmi/chains';
 import Home from "./components/Home";
-import NewsFrame from "./components/NewsFrame";
+// import NewsFrame from "./components/NewsFrame";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = process.env.REACT_APP_PROJECT_ID
@@ -33,7 +33,7 @@ function App() {
         <NavBar projectId={projectId} ethereumClient={ethereumClient} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/news" element={<NewsFrame />} />
+          {/* <Route path="/news" element={<NewsFrame />} /> */}
           <Route path="/prices" element={<CryptoChart />} />
           {/* <Route path="/team" element={<Team />} /> */}
         </Routes>
