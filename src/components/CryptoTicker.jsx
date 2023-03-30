@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react'; // import necessary libraries
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from '@emotion/styled';
 
-const TickerContainer = styled.div`
+const TickerContainer = styled.div` // styled component for the main ticker container
   position: relative;
   display: flex;
   flex-direction: row;
@@ -11,14 +11,13 @@ const TickerContainer = styled.div`
   overflow: visible;
 `;
 
-
-const InnerTicker = styled(motion.div)`
+const InnerTicker = styled(motion.div)` // styled component for the ticker content
     display: flex;
     align-items: center;
     width: 100%;
 `;
 
-const CoinsContainer = styled.div`
+const CoinsContainer = styled.div` // styled component for the container that holds the coins
   display: flex;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -36,7 +35,7 @@ const CoinsContainer = styled.div`
 `;
 
 
-const Coin = styled.div`
+const Coin = styled.div` // styled component for the individual coin boxes
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -45,13 +44,13 @@ const Coin = styled.div`
     cursor: pointer;
 `;
 
-const CoinLogo = styled.img`
+const CoinLogo = styled.img` // styled component for the coin logos
     width: 24px;
     height: 24px;
     margin-right: 5px;
 `;
 
-const CoinName = styled.span`
+const CoinName = styled.span` // styled component for the coin name
     font-size: 14px;
     font-weight: 500;
     text-align: center;
@@ -59,14 +58,14 @@ const CoinName = styled.span`
     white-space: nowrap;
 `;
 
-const CoinPrice = styled.span`
+const CoinPrice = styled.span` // styled component for the coin price
     font-size: 14px;
     font-weight: 500;
     text-align: center;
-    color: ${(props) => (props.isUp ? 'green' : 'red')};
+    color: ${(props) => (props.isUp ? 'green' : 'red')}; // change the color of the price based on whether it has increased or decreased
 `;
 
-const CoinTooltip = styled(motion.div)`
+const CoinTooltip = styled(motion.div)` // styled component for the tooltip that appears when you hover over a coin
     display: flex-box;
     flex-direction: column;
     align-items: center;
@@ -83,29 +82,30 @@ const CoinTooltip = styled(motion.div)`
 `;
 
 
-const CoinPercentage = styled.span`
+const CoinPercentage = styled.span` // styled component for the percentage change in the coin price
     font-size: 14px;
     font-weight: 500;
     text-align: center;
-    color: ${(props) => (props.isUp ? 'green' : 'red')};
+    color: ${(props) => (props.isUp ? 'green' : 'red')}; // change the color of the percentage based on whether it has increased or decreased
 `;
 
-const Separator = styled.span`
+const Separator = styled.span` // styled component for the separators between different coin information
     margin: 0 5px;
 `;
 
-const CryptoTicker = () => {
-    const [coins, setCoins] = useState([]);
-    const [activeCoin, setActiveCoin] = useState(null);
-    const coinsContainerRef = useRef(null);
+const CryptoTicker = () => { // the main component that renders the ticker
+    const [coins, setCoins] = useState([]); // state for the list of coins
+    const [activeCoin, setActiveCoin] = useState(null); // state for the currently active coin (i.e. the one being hovered over)
+    const coinsContainerRef = useRef(null); // ref for the container that holds the coins
+
     const [tooltipPosition, setTooltipPosition] = useState({
         top: 0,
         left: 0,
         width: 0,
         height: 'auto',
-    });
+    }); // state for the position and dimensions of the tooltip that appears when you hover over a coin
 
-    const fetchCoins = useCallback(async () => {
+    const fetchCoins = useCallback(async () => { // callback function that fetches the list of coins from an API
         const response = await fetch(
             'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
         );
@@ -113,13 +113,13 @@ const CryptoTicker = () => {
         setCoins(data);
     }, []);
 
-    useEffect(() => {
+    useEffect(() => { // effect that fetches the list of coins on mount and sets an interval to fetch them every minute
         fetchCoins();
         const interval = setInterval(fetchCoins, 60000);
         return () => clearInterval(interval);
     }, [fetchCoins]);
 
-    useEffect(() => {
+    useEffect(() => { // effect that scrolls the coin container every 10ms (if no coin is being hovered over)
         const coinsContainer = coinsContainerRef.current;
         if (coinsContainer) {
             const scrollInterval = setInterval(() => {
@@ -137,11 +137,11 @@ const CryptoTicker = () => {
         }
     }, [activeCoin]);
 
-    const isPriceUp = (coin) => {
+    const isPriceUp = (coin) => { // helper function that checks whether a coin's price has increased in the last 24 hours
         return coin.price_change_percentage_24h > 0;
     };
 
-    const formatPrice = (price) => {
+    const formatPrice = (price) => { // helper function that formats a price into a string with a dollar sign and two decimal places
         if (price >= 1) {
             return `$${price.toFixed(2)}`;
         } else {
@@ -149,11 +149,11 @@ const CryptoTicker = () => {
         }
     };
 
-    const openCoinChart = (coinName) => {
+    const openCoinChart = (coinName) => { // function that opens the CoinGecko page for a given coin in a new tab
         window.open(`https://www.coingecko.com/en/coins/${coinName.toLowerCase()}`, '_blank');
     };
 
-    const handleMouseEnter = (coin, e) => {
+    const handleMouseEnter = (coin, e) => { // function that sets the active coin and tooltip position when hovering over a coin
         setActiveCoin(coin.id);
         const target = e.target.closest('.coin');
         if (target) {
@@ -172,21 +172,22 @@ const CryptoTicker = () => {
         }
     };
 
-
-
-    const handleMouseLeave = () => {
+    const handleMouseLeave = () => { // function that clears the active coin when leaving a coin box
         setActiveCoin(null);
     };
 
-    const tooltipAnimation = {
+    const tooltipAnimation = { // animation for the tooltip appearing and disappearing
         hidden: { opacity: 0, scaleY: 0.5 },
         visible: { opacity: 1, scaleY: 1 },
     };
 
     return (
+        // Container for the ticker
         <TickerContainer>
             <InnerTicker>
+                {/* Container for the coins */}
                 <CoinsContainer ref={coinsContainerRef}>
+                    {/* Map over the coins and create a Coin component for each */}
                     {coins.map((coin) => (
                         <Coin
                             key={coin.id}
@@ -198,16 +199,19 @@ const CryptoTicker = () => {
                             <CoinName>{coin.name}</CoinName>
                             <Separator>-</Separator>
                             <CoinPrice isUp={isPriceUp(coin)}>
+                                {/* Format and display the current price of the coin */}
                                 {formatPrice(coin.current_price)}
                             </CoinPrice>
                             <Separator>-</Separator>
                             <CoinPercentage isUp={isPriceUp(coin)}>
+                                {/* Display the percentage change of the coin */}
                                 {coin.price_change_percentage_24h.toFixed(2)}%
                             </CoinPercentage>
                         </Coin>
                     ))}
                 </CoinsContainer>
             </InnerTicker>
+            {/* Show the tooltip for the active coin */}
             <AnimatePresence>
                 {coins.map(
                     (coin) =>
@@ -226,6 +230,7 @@ const CryptoTicker = () => {
                                     height: '',
                                 }}
                             >
+                                {/* Display information about the coin in the tooltip */}
                                 <p>Market Cap: {coin.market_cap.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
                                 <p>Total Volume: {coin.total_volume.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
                                 <p>24h High: {formatPrice(coin.high_24h)}</p>

@@ -21,7 +21,7 @@ const CryptoChart = () => {
     const fetchData = async () => {
   const response = await fetch(
     `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=${timeInterval}`
-  );
+  );// add coin logo data later to imporove visual bg
   const data = await response.json();
   const labels = data.prices.map((price) => {
     const date = moment(price[0]);
@@ -47,7 +47,7 @@ const CryptoChart = () => {
             tension: 0.4,
             // pointBorderWidth: 1,
             // pointBorderRadius: 1
-            // bacgroundImage: `url(${coinLogoUrl})`
+            // bacgroundImage: `url(${coinLogoUrl})` // will imporve in future for better visual clarity 
           
           },
         
