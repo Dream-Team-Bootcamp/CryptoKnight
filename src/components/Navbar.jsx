@@ -1,136 +1,101 @@
-import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { Nav, NavTitle, NavLinks, NavItem, NavLinkStyle, Hamburger, HamburgerLine } from '../assets/styles/NavBar.styles';
+import { Web3Button } from '@web3modal/react'
+import { Web3Modal } from '@web3modal/react';
+import { menuVariants, navTitleVariants, navItemVariants, hamburgerLineVariants } from '../assets/styles/NavBar.variants';
+import { AnimatePresence } from 'framer-motion';
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-`;
+const NavBar = ({ projectId, ethereumClient }) => {
+  const [isopen, setisopen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-const NavTitle = styled.h1`
-  margin: 0;
-  color: #fff;
-`;
+  const handleHamburgerClick = () => {
+    setisopen(!isopen);
+  };
 
-const NavLinks = styled(motion.ul)`
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-  @media (max-width: 768px) {
-    position: absolute;
-    top: 70px;
-    right: -100%;
-    width: 100%;
-    height: calc(100vh - 70px);
-    background-color: #00FF00;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s ease-in-out;
-  }
-`;
-
-const NavItem = styled(motion.li)`
-  margin: 0 1rem;
-  @media (max-width: 768px) {
-    padding: 1rem;
-  }
-`;
-
-const NavLinkStyle = styled(NavLink)`
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  &.active {
-    color: #00FF00;
-  }
-`;
-
-const menuVariants = {
-  closed: { x: "100%" },
-  open: { x: 0 },
-};
-
-
-const navItemVariants = {
-  closed: { opacity: 0, x: 100 },
-  open: { opacity: 1, x: 0 },
-  hover: { scale: 1.1 },
-};
-
-const NavBar = () => {
-  const [isMobile, setIsMobile] = React.useState(false);
-  const location = useLocation();
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize(); // set initial value
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const [isOpen, setIsOpen] = React.useState(false);
+  const handleLinkClick = () => {
+    setisopen(false);
+  };
 
   return (
     <Nav>
-      <NavTitle>CryptoKnight</NavTitle>
-      {isMobile ? (
-        <>
-          <button onClick={() => setIsOpen(!isOpen)}>Menu</button>
+      <NavTitle
+        initial={false}
+        whileHover={navTitleVariants.hover}
+      >
+        Menu
+      </NavTitle>
+      <AnimatePresence>
+        {isopen && (
           <NavLinks
-            variants={menuVariants}
             initial="closed"
-            animate={isOpen ? "open" : "closed"}
+            animate={isopen ? "open" : "closed"}
+            exit="closed"
+            variants={menuVariants}
           >
             <NavItem
               variants={navItemVariants}
-              whileHover="hover"
-              onClick={() => setIsOpen(false)}
+              whileHover={navItemVariants.hover}
+              whileTap={{ scale: 0.9 }}
             >
-              <NavLinkStyle to="/" exact={true} isActive={() => location.pathname === "/"}>
+              <NavLinkStyle to="/" onClick={handleLinkClick} exact>
                 Home
               </NavLinkStyle>
             </NavItem>
             <NavItem
               variants={navItemVariants}
-              whileHover="hover"
-              onClick={() => setIsOpen(false)}
+              whileHover={navItemVariants.hover}
+              whileTap={{ scale: 0.9 }}
             >
-              <NavLinkStyle to="/about" isActive={() => location.pathname.startsWith("/about")}>
-                Chart
+              <NavLinkStyle to="/about" onClick={handleLinkClick}>
+                About
               </NavLinkStyle>
             </NavItem>
             <NavItem
               variants={navItemVariants}
-              whileHover="hover"
-              onClick={() => setIsOpen(false)}
+              whileHover={navItemVariants.hover}
+              whileTap={{ scale: 0.9 }}
             >
-              <NavLinkStyle to="/contact" isActive={() => location.pathname.startsWith("/contact")}>
+              <NavLinkStyle to="/contact" onClick={handleLinkClick}>
                 Contact
               </NavLinkStyle>
             </NavItem>
+            <NavItem
+              variants={navItemVariants}
+              whileHover={navItemVariants.hover}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Web3Button onClick={() => setModalOpen(true)}>
+                Connect Wallet
+              </Web3Button>
+            </NavItem>
           </NavLinks>
-        </>
-      ) : (
-        <div>
-          <NavLinkStyle to="/" exact={true} isActive={() => location.pathname === "/"}>
-            Home
-          </NavLinkStyle>
-          <NavLinkStyle to="/about" isActive={() => location.pathname.startsWith("/about")}>
-            Chart
-          </NavLinkStyle>
-          <NavLinkStyle to="/contact" isActive={() => location.pathname.startsWith("/contact")}>
-            Contact
-          </NavLinkStyle>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
+      <Web3Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+      />
+      <Hamburger
+        onClick={handleHamburgerClick}
+        initial={false}
+        animate={isopen ? "open" : "closed"}
+      >
+        <HamburgerLine
+          variants={hamburgerLineVariants}
+          isopen={isopen ? "true" : "false"}
+        />
+        <HamburgerLine
+          variants={hamburgerLineVariants}
+          isopen={isopen ? "true" : "false"}
+        />
+        <HamburgerLine
+          variants={hamburgerLineVariants}
+          isopen={isopen ? "true" : "false"}
+        />
+      </Hamburger>
     </Nav>
   );
 };
