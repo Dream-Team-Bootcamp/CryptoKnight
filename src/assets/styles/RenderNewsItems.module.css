@@ -1,132 +1,122 @@
 .newsItems {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 16px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-  }
-  
-  /* First Row - News Title */
-  .newsTitleRow {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .newsTitle {
-    font-weight: 700;
-    font-size: 24px;
-    color: #50ae55;
-    margin: 16px;
-    text-align: center;
-  }
-  
-  /* Second Row - Currencies and Published Date */
-  .newsItemMiddleRow {
-    display: flex;
-    flex-direction: row;
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-top: 8px;
-  }
-  
-  .newsCurrencies {
-    display: flex;
-    flex-direction: column;
-    color: #50ae55;
-    font-size: 20px;
-    font-weight: 700;
-    margin-right: 32px;
-    margin-top: 0px;
-  }
-  
-  .newsCurrencies p {
-    margin: 0;
-    margin-bottom: 2px;
-  }
-  
-  .publishedAt {
-    display: flex;
-    flex-direction: column;
-    color: #50ae55;
-    font-size: 20px; 
-    font-weight: 700;
-    align-items: center; /* add this line */
-    margin-right: 32px;
-    margin-top: 0px; 
-  }
-  
-  .publishedDateTime {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 0px;
-  }
-  
-  .publishedDateTime p {
-    font-size: 20px;
-    margin-right: 16px;
-    margin-bottom: 2px;
-    text-align: center;
-  }
-  
-  /* Third Row - news items styling here */
-  .newsItemBottomRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-bottom: 8px;
-  }
-  
-  .newsDetails {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-weight: 700;
-    color: #50ae55;
-    font-size: 20px;
-    margin: 16px;
-  }
-  
-  .newsDetails p {
-    margin: 0;
-    margin-right: 10px;
-    margin-bottom: 8px;
-  }
-  
-  .fullArticle {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 16px;
-  }
-  
-  .newsUrl {
-    margin-top: 16px;
-  }
-  
-  .newsUrlButton {
-    align-items: center;
-    background-color: rgba(34, 34, 34, 0.9);
-    border: none;
-    border-radius: 5px;
-    padding: 12px 24px;
-    font-weight: 700;
-    display: flex;
-    height: 36px;
-    justify-content: center;
-    font-size: 24px;
-    color: #50ae55;
-    text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .newsUrlButton:hover {
-    background-color: #50ae55;
-    color: white;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 8px; /* Reduce margin to 8px */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #50ae55;
+  overflow: hidden;
+}
+
+/* First Row - News Title */
+.newsTitleRow {
+  display: flex;
+  justify-content: left;
+  margin-left: 16px;
+}
+
+.newsTitle {
+  font-weight: 700;
+  font-size: 32px;
+  color: #50ae55;
+  text-align: left;
+  margin-left: 16px;
+}
+
+/* Second Row - Currencies and Published Date */
+.newsItemMiddleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; /* Reduce margin to 8px */
+  margin-left: 16px;
+}
+
+.newsCurrencies {
+  color: #50ae55;
+  font-weight: 700;
+  margin-left: 16px;
+}
+
+.newsCurrencies p {
+  font-size: 24px;
+  margin: 0;
+  margin-right: 8px;
+  margin-bottom: 2px;
+}
+
+.publishedAt {
+  color: #50ae55;
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 16px;
+}
+
+.publishedDateTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.publishedDateTime p {
+  font-size: 20px;
+  margin-right: 16px;
+}
+
+
+
+/* Third Row - news items styling here */
+.newsItemBottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px; /* Reduce margin to 8px */
+  margin-left: 16px;
+}
+
+.newsDetails {
+  display: flex;
+  flex-direction: row;
+  font-weight: 700;
+  color: #50ae55;
+  margin-left: 16px;
+}
+
+.newsDetails p {
+  font-size: 24px;
+  margin: 0;
+  margin-right: 32px;
+}
+
+.fullArticle {
+  margin-right: 16px;
+}
+
+.newsUrl {
+  margin-top: 16px;
+}
+
+.newsUrlButton {
+  align-items: center;
+  background-color: rgba(34, 34, 34, 0.9);
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-weight: 700;
+  display: flex;
+  height: 36px;
+  justify-content: center;
+  font-size: 24px;
+  color: #50ae55;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.newsUrlButton:hover {
+  background-color: #50ae55;
+  color: white;
+}
