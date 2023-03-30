@@ -5,7 +5,6 @@ import BackgroundAnimation from "./components/BackgroundAnimation";
 import Frank from "./components/Frank";
 import NavBar from "./components/Navbar";
 import CryptoChart from "./components/CryptoChart";
-import Contact from "./components/Placeholder3";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
@@ -28,8 +27,8 @@ function App() {
   return (
     <Router>
       <WagmiConfig client={wagmiClient}>
+      <CryptoTicker />
         <BackgroundAnimation />
-        <CryptoTicker />
         <NavBar projectId={projectId} ethereumClient={ethereumClient} />
         <Routes>
           <Route path="/" element={<Home />} />

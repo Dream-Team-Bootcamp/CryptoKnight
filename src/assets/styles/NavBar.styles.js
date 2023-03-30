@@ -12,8 +12,6 @@ export const Nav = styled(motion.nav)`
   background-color: rgba(0, 0, 0, 0.1);
   color: #50ae55;
   font-size: 2rem;
-  z-index: 10;
-  
 `;
 
 // Navigation title
@@ -22,40 +20,45 @@ export const NavTitle = styled(motion.h1)`
   cursor: pointer;
   font-size: 2rem;
   font-weight: bold;
-  z-index: 10;
 `;
 
+// Navigation links container
 export const NavLinks = styled(motion.ul)`
-list-style: none;
-display: flex-box;
-margin: 0;
-padding: 0;
-position: fixed;
-top: 0;
-right: 0;
-width: 35%;
-height: 100vh;
-background-color: rgba(0, 0, 0, 0.8);
-display: flex;
-flex-direction: column;
-align-items: center;
-font-size: 10rem;
-justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 25%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
 `;
 
+// Individual navigation item
 export const NavItem = styled(motion.li)`
-margin: 1rem;
-padding: 1rem;
-font-size: 1.5rem;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
 `;
 
+// Navigation link
 export const NavLinkStyle = styled(NavLink)`
-text-decoration: none;
-color: #fff;
-font-weight: bold;
-&.active {
+  text-decoration: none;
   color: #50ae55;
-}
+  font-weight: bold;
+  font-size: 2rem;
+  &:hover {
+    color: white;
+  }
+  &.active {
+    color: white;
+  }
 `;
 
 // Hamburger menu button
@@ -81,6 +84,24 @@ export const Hamburger = styled(motion.div)`
   }
 `;
 
+// Hamburger menu button lines
+export const HamburgerLine = styled(motion.div)`
+  width: 100%;
+  height: 5px;
+  background-color: #50ae55;
+  &:nth-child(1) {
+    top: ${props => (props.isopen ? "0" : "-10px")};
+  }
+  &:nth-child(2) {
+    top: 0;
+  }
+  &:nth-child(3) {
+    top: ${props => (props.isopen ? "0" : "10px")};
+  }
+  position: absolute;
+`;
+
+
 export const ConnectWeb3Button = styled.button`
   display: flex;
   background-color: #50ae55;
@@ -93,23 +114,4 @@ export const ConnectWeb3Button = styled.button`
   &:hover {
     background-color: #3c8f47;
   }
-`;
-
-
-
-// Hamburger menu button lines
-export const HamburgerLine = styled(motion.div)`
-  width: 100%;
-  height: 5px;
-  background-color: #8;
-  &:nth-child(1) {
-    top: ${props => (props.isopen ? "0" : "-10px")};
-  }
-  &:nth-child(2) {
-    top: 0;
-  }
-  &:nth-child(3) {
-    top: ${props => (props.isopen ? "0" : "10px")};
-  }
-  position: absolute;
 `;
