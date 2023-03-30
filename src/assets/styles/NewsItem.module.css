@@ -1,5 +1,71 @@
 
-
+.newsItem {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 8px;
+  }
+  
+  .newsTitle {
+    margin: 0;
+  }
+  
+  .newsItemRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .newsCurrencies {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .publishedAt {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .publishedDateTime {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .newsDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fullArticle {
+    margin-left: auto;
+  }
+  
+  .newsUrlButton {
+    background-color: #0077b6;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+  
+  .newsUrlButton:hover {
+    background-color: #023e8a;
+  }
+  
+  .newsUrlButton div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .newsUrlButton p {
+    margin: 0;
+  }
+  
 
 
 
@@ -22,24 +88,6 @@
 .optionsRow {
     display: flex;
     gap: 20px;
-    width: 100%;
-}
-
-.filterAndRegions {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-}
-
-.kindsAndCurrencies {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
 }
 

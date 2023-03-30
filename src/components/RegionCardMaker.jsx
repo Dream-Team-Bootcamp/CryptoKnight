@@ -1,36 +1,30 @@
 import styles from "../assets/styles/RegionCards.module.css";
-import React from "react";
-import { ReactComponent as FlagEn } from "../assets/images/flags/gb.svg";
-import { ReactComponent as FlagDe } from "../assets/images/flags/de.svg";
-import { ReactComponent as FlagNl } from "../assets/images/flags/nl.svg";
-import { ReactComponent as FlagEs } from "../assets/images/flags/es.svg";
-import { ReactComponent as FlagFr } from "../assets/images/flags/fr.svg";
-import { ReactComponent as FlagIt } from "../assets/images/flags/it.svg";
-import { ReactComponent as FlagPt } from "../assets/images/flags/pt.svg";
-import { ReactComponent as FlagRu } from "../assets/images/flags/ru.svg";
+import newsOptionChoices from "../assets/data/newsOptionChoices";
 
-const regionOptions = [
-    { code: "en", name: "English", flag: <FlagEn /> },
-    { code: "de", name: "German", flag: <FlagDe /> },
-    { code: "nl", name: "Dutch", flag: <FlagNl /> },
-    { code: "es", name: "Spanish", flag: <FlagEs /> },
-    { code: "fr", name: "French", flag: <FlagFr /> },
-    { code: "it", name: "Italian", flag: <FlagIt /> },
-    { code: "pt", name: "Portuguese", flag: <FlagPt /> },
-    { code: "ru", name: "Russian", flag: <FlagRu /> },
-];
+// Component that renders the SVG image with a specified viewBox
+const FlagImage = ({ svg, viewBox }) => {
+  return (
+    <svg viewBox={viewBox} className={styles.flags}>
+      {svg}
+    </svg>
+  );
+};
 
 const RegionCardMaker = () => {
-    return (
-    <div className={`${styles.regionCardsContainer} ${styles.regionCardsContainer}`}>
-        {regionOptions.map((option) => (
-        <div className="regionCard" key={option.code}>
-            <div className="regionCardImage">{option.flag}</div>
-            <div className="regionCardTitle">{option.title}</div>
-        </div>
+  return (
+    <div className={styles.regionCardsContainer}>
+      <div className={`${styles.regionOptionGroup} ${styles.regionCardsContainer}`}>
+        {newsOptionChoices.regions.map((option) => (
+          <div className={styles.regionCard} key={option.code}>
+            <div className={styles.regionCardImage}>
+              <FlagImage svg={option.image} viewBox="0 0 64 64" />
+            </div>
+            <div className={styles.regionCardTitle}>{option.name}</div>
+          </div>
         ))}
-        </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default RegionCardMaker;

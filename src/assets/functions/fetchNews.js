@@ -9,13 +9,13 @@ async function fetchCryptoPanicData(options = {}) {
     try {
         const defaultParams = {
             auth_token: auth_token,
+            currencies: options.currencies.code, // update currencies to use code property only
+            filter: options.filter.value,
+            kind: options.kind.value,
+            regions: options.regions.code, // update regions to use code property only
         };
 
-        const params = { ...defaultParams, ...options };
-        console.log(params);
-        const response = await axios.get(cryptoPanicEndpoint, { params });
-        console.log("Response: " + response);
-        console.log(response.data);
+        const response = await axios.get(cryptoPanicEndpoint, { params: defaultParams });
         const newsData = response.data.results;
         console.log("NEWS DATA: " + newsData);
         return newsData;
@@ -25,4 +25,20 @@ async function fetchCryptoPanicData(options = {}) {
 }
 
 export default fetchCryptoPanicData;
+
+
+//         const params = { ...defaultParams, ...options };
+//         console.log(params);
+//         const response = await axios.get(cryptoPanicEndpoint, { params });
+//         console.log("Response: " + response);
+//         console.log(response.data);
+//         const newsData = response.data.results;
+//         console.log("NEWS DATA: " + newsData);
+//         return newsData;
+//     } catch (error) {
+//         console.error('Error fetching CryptoPanic data:', error);
+//     }
+// }
+
+// export default fetchCryptoPanicData;
 

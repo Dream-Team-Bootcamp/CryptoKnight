@@ -1,6 +1,8 @@
 import React from "react";
 import CardMaker from "./CardMaker";
 import RegionCardMaker from './RegionCardMaker';
+import CurrencyList from "./CurrencyList"
+import CustomCurrency from  "./CustomCurrency"
 import styled from '@emotion/styled';
 import classNames from 'classnames';
 import styles from "../assets/styles/OptionsContainer.module.css";
@@ -8,71 +10,11 @@ import { motion } from "framer-motion";
 
 const StyledOptionsContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-
-  .topContainer {
-    ${classNames(styles.topContainer)}
-  }
-
-  .bottomContainer {
-    ${classNames(styles.bottomContainer)}
-  }
-
-  .currenciesContainer {
-    gap: 10px;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-
-  .filtersContainer {
-    ${classNames(styles.filtersContainer)}
-  }
-
-  .kindsContainer {
-    ${classNames(styles.kindsContainer)}
-  }
-
-  .regionsContainer {
-    ${classNames(styles.regionsContainer)}
-  }
-
-  span {
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-    color: #333;
-  }
-
-  .selected {
-    background-color: #4c4cff;
-    color: white;
-    border-radius: 0.5rem;
-  }
-
-  input[type="text"] {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    margin-right: 0.5rem;
-  }
-
-  button[type="submit"] {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #4c4cff;
-    color: white;
-    cursor: pointer;
-  }
+  flex-direction: column;
+  // justify-content: space-between;
+  width: 100%;
+  height: 100%;
 `;
-
-
 
 export default function DrawOptionsContainer({
   setNewsOptions,
@@ -82,7 +24,9 @@ export default function DrawOptionsContainer({
   handleCustomCurrencyChange,
   handleCustomCurrencySubmit
 }) {
+  // console.log("newsOptionChoices at optionscontainer start: ", newsOptionChoices)
   return (
+
     <StyledOptionsContainer
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -90,7 +34,7 @@ export default function DrawOptionsContainer({
     >
       <div className={styles.topContainer}>
       <div className={styles.filtersContainer}>
-          <CardMaker cardType="filter" setNewsOptions={setNewsOptions} newsOptions={newsOptions} />
+        <CardMaker cardType="filter" setNewsOptions={setNewsOptions} newsOptions={newsOptions} />
         </div>
         <div className={styles.kindsContainer}>
           <CardMaker cardType="kind" setNewsOptions={setNewsOptions} newsOptions={newsOptions} />
@@ -101,7 +45,20 @@ export default function DrawOptionsContainer({
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.currenciesContainer}>
-          <CardMaker cardType="currencies" setNewsOptions={setNewsOptions} newsOptions={newsOptions} />
+        <CurrencyList
+            newsOptionChoices={newsOptionChoices}
+            newsOptions={newsOptions}
+            setNewsOptions={setNewsOptions}
+            customCurrency={customCurrency}
+            handleCustomCurrencyChange={handleCustomCurrencyChange}
+            handleCustomCurrencySubmit={handleCustomCurrencySubmit}
+          />
+          <CustomCurrency
+            customCurrency={customCurrency}
+            handleCustomCurrencyChange={handleCustomCurrencyChange}
+            handleCustomCurrencySubmit={handleCustomCurrencySubmit}
+          />
+
         </div>
       </div>
   </StyledOptionsContainer>

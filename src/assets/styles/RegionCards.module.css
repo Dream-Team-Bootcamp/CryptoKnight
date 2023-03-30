@@ -1,64 +1,54 @@
-/* to display the flags side by side, you can modify the .regionOptionsContainer style to set the flex-direction to row: */
-.regionOptionGroup {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
-}
-
 .regionCardsContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 16px;
-    overflow-x: scroll;
+    padding: 5px;
     flex-wrap: wrap;
-}
-
-.regionCard {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
+  }
+  
+  .regionCard {
+    width: 80px;
+    height: 80px;
+    border-radius: 10%;
+    border: 1px solid #50ae55;
+    background-color: rgba(34, 34, 34, 0.9);
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     display: flex;
+    margin: 8px; /* updated */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-right: 16px;
-    margin-bottom: 16px;
 }
 
-.regionCardImage {
-    height: 100px;
-    width: auto;
-    object-fit: contain;
-}
-
-.regionCardTitle {
+  
+  .regionCardImage {
+    height: 64px;
+    width: 64px;
+    /* margin-top: 8px; */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .regionCardImage svg {
+    height: 100%;
+    width: 100%;
+  }
+  .regionCardTitle {
+    color:  #50ae55;
     font-weight: bold;
-    margin-top: 10px;
+    margin-bottom: 8px;
     font-size: 12px;
     text-align: center;
-}
-
-.regionCard:hover {
+  }
+  
+  .regionCard:hover {
     transform: scale(1.05);
-}
-
-.regionCardSelected {
+  }
+  
+  .regionCardSelected {
     background-color: #0057ff;
     color: #fff;
-}
-
-.flags {
-    height: 24px;
-    width: auto;
-    object-fit: contain;
-}
+  }
