@@ -1,4 +1,3 @@
-// import CurrencyList from "./CurrencyList";
 import { motion }  from "framer-motion";
 import styles from "../assets/styles/RenderNewsItems.module.css";
 
@@ -28,17 +27,16 @@ export const renderNewsItem = (item) => {
       <div className={styles.newsCurrencies}>
   <p>Coins: {Object.values(item.currencies).map(currency => `${currency.title} (${currency.code})`).join(', ')}</p>
   </div>
-  
+
   <div className={styles.publishedAt}>
     <p>Published at:</p>
     <div className={styles.publishedDateTime}>
       <p>{formattedDate}</p>
       <p>{formattedTime}</p>
-    
+
   </div>
 </div>
 </div>
-
 
       {/* Third Row - Type, Domain, Source, and Full Article Link */}
       <div className={styles.newsItemBottomRow}>
@@ -76,25 +74,3 @@ export const renderNewsItem = (item) => {
     </div>
   );
 };
-
-// {renderNewsItemCurrencies(item)}
-// const renderNewsItemCurrencies = (item) => (
-//   <motion.div
-//     className={styles.newsCurrencies}
-//     initial={{ opacity: 0, y: -10 }}
-//     animate={{ opacity: 1, y: 0 }}
-//     transition={{ duration: 0.2, delay: 0.1 }}
-//   >
-//     <p>Currencies:</p>
-//     <motion.div
-//       className={styles.currencyList}
-//       initial={{ opacity: 0 }}
-//       animate={{ opacity: 1 }}
-//       transition={{ duration: 0.2, delay: 0.2 }}
-//     >
-//       {item.currencies.map((currency) => (
-//         <CurrencyList key={currency.code} currency={currency} />
-//       ))}
-//     </motion.div>
-//   </motion.div>
-// );

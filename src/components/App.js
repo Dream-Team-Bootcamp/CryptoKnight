@@ -5,9 +5,11 @@ import BackgroundAnimation from "./components/BackgroundAnimation";
 import Frank from "./components/Frank";
 import NavBar from "./components/Navbar";
 import CryptoChart from "./components/CryptoChart";
-import Contact from "./components/Placeholder3";
+import Knightly from "./components/Knightly";
+import WordSoup from "./components/WordSoup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ConnectWeb3 from "./components/ConnectWeb3";
+
 
 
 function App() {
@@ -15,10 +17,17 @@ function App() {
     <Router>
       <BackgroundAnimation />
       <CryptoTicker />
+     
       <NavBar ConnectWeb3Component={ConnectWeb3} />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<CryptoChart />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={
+          <div>
+            <Knightly />
+            <WordSoup />
+          </div>
+        } />
       </Routes>
       <Frank />
     </Router>

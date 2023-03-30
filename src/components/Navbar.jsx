@@ -23,7 +23,7 @@ const NavBar = ({ projectId, ethereumClient }) => {
         initial={false}
         whileHover={navTitleVariants.hover}
       >
-        Menu
+        CryptoKnight
       </NavTitle>
       <AnimatePresence>
         {isopen && (
