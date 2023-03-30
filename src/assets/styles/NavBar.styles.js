@@ -12,6 +12,7 @@ export const Nav = styled(motion.nav)`
   background-color: rgba(0, 0, 0, 0.1);
   color: #50ae55;
   font-size: 2rem;
+  z-index: 10;
   
 `;
 
@@ -21,6 +22,7 @@ export const NavTitle = styled(motion.h1)`
   cursor: pointer;
   font-size: 2rem;
   font-weight: bold;
+  z-index: 10;
 `;
 
 export const NavLinks = styled(motion.ul)`
