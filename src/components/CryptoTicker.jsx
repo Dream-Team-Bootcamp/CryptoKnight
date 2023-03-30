@@ -105,19 +105,20 @@ const CryptoTicker = () => { // the main component that renders the ticker
         height: 'auto',
     }); // state for the position and dimensions of the tooltip that appears when you hover over a coin
 
-    const fetchCoins = useCallback(async () => { // callback function that fetches the list of coins from an API
-        const response = await fetch(
-            'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-        );
+    // Fetch the list of coins from the serverless function
+
+    const fetchCoins = useCallback(async () => {
+        const response = await fetch('/.netlify/functions/coingecko');
         const data = await response.json();
         setCoins(data);
-    }, []);
-
-    useEffect(() => { // effect that fetches the list of coins on mount and sets an interval to fetch them every minute
+      }, []);
+      
+      useEffect(() => {
         fetchCoins();
         const interval = setInterval(fetchCoins, 60000);
         return () => clearInterval(interval);
-    }, [fetchCoins]);
+      }, [fetchCoins]);
+      
 
     useEffect(() => { // effect that scrolls the coin container every 10ms (if no coin is being hovered over)
         const coinsContainer = coinsContainerRef.current;
@@ -282,22 +283,22 @@ export default CryptoTicker;
 //     });
 //     const [timeoutId, setTimeoutId] = useState(null); // ID for the timeout function
 
-//     // Fetch coin data from the API using the useCallback hook
-//     const fetchCoins = useCallback(async () => {
-//         const response = await fetch(
-//             'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-//         );
-//         const data = await response.json();
-//         setCoins(data);
-//         setIsDataLoaded(true);
-//     }, []);
+    // // Fetch coin data from the API using the useCallback hook
+    // const fetchCoins = useCallback(async () => {
+    //     const response = await fetch(
+    //         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+    //     );
+    //     const data = await response.json();
+    //     setCoins(data);
+    //     setIsDataLoaded(true);
+    // }, []);
 
-//     // Use useEffect hook to fetch coin data and set an interval to update it
-//     useEffect(() => {
-//         fetchCoins();
-//         const interval = setInterval(fetchCoins, 60000);
-//         return () => clearInterval(interval);
-//     }, [fetchCoins]);
+    // // Use useEffect hook to fetch coin data and set an interval to update it
+    // useEffect(() => {
+    //     fetchCoins();
+    //     const interval = setInterval(fetchCoins, 60000);
+    //     return () => clearInterval(interval);
+    // }, [fetchCoins]);
 
 //     // Determine if a coin's price is up or down
 //     const isPriceUp = (coin) => {
