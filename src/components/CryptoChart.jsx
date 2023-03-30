@@ -176,7 +176,8 @@ const CryptoChart = () => {
         <option value="max">All time</option>
       </select>
       {/* Chart render to canvas. check canvas styling,,,*/}
-      <canvas id="crypto-chart" style={{ fontSize: 3, backgroundColor: "transparent", padding: '1%', borderRadius: '5px', maxWidth: '100%'}}></canvas>
+      <canvas id="crypto-chart" style={{ fontSize: '3px', backgroundColor: 'transparent', padding: '1%', borderRadius: '5px', maxWidth: '100%', color: 'white', fontWeight: 'bold' }}></canvas>
+
     </div>
   );
 };

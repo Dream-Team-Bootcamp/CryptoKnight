@@ -12,6 +12,10 @@ module.exports = function (app) {
       pathRewrite: {
         '^/api/posts': '/api/v1/posts',
       },
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
     })
   );
 };

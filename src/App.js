@@ -5,11 +5,12 @@ import BackgroundAnimation from "./components/BackgroundAnimation";
 import Frank from "./components/Frank";
 import NavBar from "./components/Navbar";
 import CryptoChart from "./components/CryptoChart";
-import Contact from "./components/Placeholder3";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { arbitrum, mainnet, polygon } from 'wagmi/chains';
+import Home from "./components/Home";
+// import NewsFrame from "./components/NewsFrame";
 
 const chains = [arbitrum, mainnet, polygon];
 const projectId = process.env.REACT_APP_PROJECT_ID
@@ -26,12 +27,14 @@ function App() {
   return (
     <Router>
       <WagmiConfig client={wagmiClient}>
+      <CryptoTicker />
         <BackgroundAnimation />
-        <CryptoTicker />
         <NavBar projectId={projectId} ethereumClient={ethereumClient} />
         <Routes>
-          <Route path="/about" element={<CryptoChart />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/news" element={<NewsFrame />} /> */}
+          <Route path="/prices" element={<CryptoChart />} />
+          {/* <Route path="/team" element={<Team />} /> */}
         </Routes>
         <Frank />
       </WagmiConfig>

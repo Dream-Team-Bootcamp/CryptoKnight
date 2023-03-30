@@ -1,4 +1,4 @@
-import { createClient, Connector, configureChains, useClient } from "wagmi";
+import { createClient, Connector } from "wagmi";
 import { mainnet } from "wagmi/chains";
 import { Web3Provider } from "@ethersproject/providers";
 

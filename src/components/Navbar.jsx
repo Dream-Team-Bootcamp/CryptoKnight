@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Nav, NavTitle, NavLinks, NavItem, NavLinkStyle, Hamburger, HamburgerLine } from '../assets/styles/NavBar.styles';
-import { Web3Button } from '@web3modal/react'
+import { Web3Button } from '@web3modal/react';
 import { Web3Modal } from '@web3modal/react';
 import { menuVariants, navTitleVariants, navItemVariants, hamburgerLineVariants } from '../assets/styles/NavBar.variants';
 import { AnimatePresence } from 'framer-motion';
@@ -23,7 +23,7 @@ const NavBar = ({ projectId, ethereumClient }) => {
         initial={false}
         whileHover={navTitleVariants.hover}
       >
-        CryptoKnight
+        <img src="../assets/images/cryptoknight.webp" alt="CryptoKnight" />
       </NavTitle>
       <AnimatePresence>
         {isopen && (
@@ -47,8 +47,8 @@ const NavBar = ({ projectId, ethereumClient }) => {
               whileHover={navItemVariants.hover}
               whileTap={{ scale: 0.9 }}
             >
-              <NavLinkStyle to="/about" onClick={handleLinkClick}>
-                About
+              <NavLinkStyle to="/news" onClick={handleLinkClick}>
+                News
               </NavLinkStyle>
             </NavItem>
             <NavItem
@@ -56,8 +56,8 @@ const NavBar = ({ projectId, ethereumClient }) => {
               whileHover={navItemVariants.hover}
               whileTap={{ scale: 0.9 }}
             >
-              <NavLinkStyle to="/contact" onClick={handleLinkClick}>
-                Contact
+              <NavLinkStyle to="/prices" onClick={handleLinkClick}>
+                Prices
               </NavLinkStyle>
             </NavItem>
             <NavItem
@@ -71,12 +71,18 @@ const NavBar = ({ projectId, ethereumClient }) => {
             </NavItem>
           </NavLinks>
         )}
-      </AnimatePresence>
+     </AnimatePresence>
       <Web3Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         projectId={projectId}
         ethereumClient={ethereumClient}
+        themeVariables={{
+          '--w3m-font-family': 'Rubik, sans-serif',
+          '--w3m-accent-color': '#378805',
+          '--w3m-background-color': '#202121',
+          '--w3m-logo-image-url': 'https://i.imgur.com/VFJFnuW.png',
+        }}
       />
       <Hamburger
         onClick={handleHamburgerClick}
