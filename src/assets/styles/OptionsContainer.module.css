@@ -1,0 +1,137 @@
+/* styles.module.css */
+
+.topContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #50ae55;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.kindsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #50ae55;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.regionsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #50ae55;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.currenciesContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #50ae55;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  flex: 1;
+  justify-content: space-between;
+}
+
+  input[type="text"] {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+button[type="submit"] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #4c4cff;
+    color: white;
+    cursor: pointer;
+}
+
+
+  
+  /* .kindsContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+   */
+
+
+
+
+.currencyInput {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .currencyButton {
+    padding: 0.5rem 1rem;
+    background-color: #0072c6;
+    color: #50ae55;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .currencyButton:hover {
+    background-color: #005ea2;
+  }
+
+    
+  .currencyCards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .currencyCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    grid-row: auto / span 1;
+    grid-column: auto / span 1;
+  }

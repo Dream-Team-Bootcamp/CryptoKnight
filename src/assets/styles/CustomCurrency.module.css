@@ -1,0 +1,79 @@
+.customCurrency {
+    width: 25%;
+    margin-top: 1rem;
+    border: 1px solid #50ae55;
+  }
+  
+  .customCurrencyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border: 1px solid #50ae55;
+    border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .customCurrencyHeader p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    color: #50ae55;
+  }
+  
+  .customCurrencyHeader i {
+    font-size: 1.2rem;
+    color: #50ae55;
+  }
+  
+  .customCurrencyInput {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .customCurrencyInput:focus {
+    border-color: #50ae55;
+    box-shadow: 0 0 0 2px rgba(80, 174, 85, 0.3);
+  }
+  
+
+  .customCurrencyButton {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #50ae55;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .customCurrencyButton:hover {
+    background-color: #3d8f47;
+  }
+  
+  .customCurrencyButton:focus {
+    outline: none;
+  }
+  
+  .input {
+    width: 50%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #50ae55;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #50ae55;
+    text-align: center;
+  }

@@ -1,0 +1,78 @@
+.currency {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+  }
+  
+  .optionLabelContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .optionLabel {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  
+  .optionChoices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .currencyRow {
+    width: 100%;
+  }
+  
+  .currencyOptions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .currencyContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80px;
+    height: 80px;
+    margin: 8px;
+  }
+  
+  .currencyContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    width: 64px;
+    height: 64px;
+  }
+  
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .currencyCode {
+    font-size: 14px;
+    color: #50ae55;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  .currencyName {
+    font-size: 14px;
+    color: #50ae55;
+    font-weight: bold;
+    text-align: center;
+  }
+
+img {
+    width: 64px;
+    height: 64px;
+}
