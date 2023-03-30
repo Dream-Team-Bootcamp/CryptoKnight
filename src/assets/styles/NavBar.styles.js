@@ -2,34 +2,42 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+// Main navigation container
 export const Nav = styled(motion.nav)`
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 1rem;
-position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #50ae55;
+  font-size: 2rem;
+  
 `;
 
+// Navigation title
 export const NavTitle = styled(motion.h1)`
-margin: 0;
-color: #fff;
-cursor: pointer;
+  margin: 0;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
 `;
 
 export const NavLinks = styled(motion.ul)`
 list-style: none;
-display: flex;
+display: flex-box;
 margin: 0;
 padding: 0;
 position: fixed;
 top: 0;
 right: 0;
-width: 66%;
+width: 35%;
 height: 100vh;
 background-color: rgba(0, 0, 0, 0.8);
 display: flex;
 flex-direction: column;
 align-items: center;
+font-size: 10rem;
 justify-content: center;
 `;
 
@@ -48,10 +56,11 @@ font-weight: bold;
 }
 `;
 
+// Hamburger menu button
 export const Hamburger = styled(motion.div)`
   width: 30px;
-  height: 3px;
-  background-color: #fff;
+  height: 5px;
+  background-color: #50ae55;
   position: relative;
   cursor: pointer;
   &:before,
@@ -59,8 +68,8 @@ export const Hamburger = styled(motion.div)`
     content: "";
     position: absolute;
     width: 100%;
-    height: 3px;
-    background-color: #fff;
+    height: 5px;
+    background-color: #50ae55;
   }
   &:before {
     top: -10px;
@@ -86,10 +95,11 @@ export const ConnectWeb3Button = styled.button`
 
 
 
+// Hamburger menu button lines
 export const HamburgerLine = styled(motion.div)`
   width: 100%;
-  height: 3px;
-  background-color: #fff;
+  height: 5px;
+  background-color: #8;
   &:nth-child(1) {
     top: ${props => (props.isopen ? "0" : "-10px")};
   }
@@ -101,4 +111,3 @@ export const HamburgerLine = styled(motion.div)`
   }
   position: absolute;
 `;
-
