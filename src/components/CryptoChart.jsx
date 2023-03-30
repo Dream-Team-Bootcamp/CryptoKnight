@@ -1,6 +1,8 @@
 // import dependencies and css
 import React, { useState, useEffect } from "react";
 import { Chart } from "chart.js/auto";
+import moment from "moment";
+import '../assets/styles/CryptoChart.css';
 
 const CryptoChart = () => {
   const [coin, setCoin] = useState("bitcoin");
@@ -17,16 +19,24 @@ const CryptoChart = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=${timeInterval}`
-      );
-      const data = await response.json();
-      const dates = data.prices.map((price) =>
-        new Date(price[0]).toLocaleDateString()
-      );
+  const response = await fetch(
+    `https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=${timeInterval}`
+  );// add coin logo data later to imporove visual bg
+  const data = await response.json();
+  const labels = data.prices.map((price) => {
+    const date = moment(price[0]);
+    const label = date.format("DD MMM YY HH:mm");
+    if (timeInterval === "1d" || timeInterval === "60" || timeInterval === "15") {
+      return `${label}`
+    } else {
+      return label;
+    }
+  });
+  
       const prices = data.prices.map((price) => price[1]);
       setChartData({
-        labels: dates,
+        labels: labels,
+        fontColor: "red",
         datasets: [
           {
             label: `${coin.toUpperCase()} Price`,
@@ -35,13 +45,16 @@ const CryptoChart = () => {
             backgroundColor: "black",
             borderColor: "green",
             tension: 0.4,
-            pointBorderWidth: 1,
-            pointBorderRadius: 1
+            // pointBorderWidth: 1,
+            // pointBorderRadius: 1
+            // bacgroundImage: `url(${coinLogoUrl})` // will imporve in future for better visual clarity 
+          
           },
+        
         ],
       });
     };
-    
+  
     fetchData();
   }, [coin, timeInterval]);
 
@@ -57,8 +70,8 @@ const CryptoChart = () => {
 
   return (
     <div>
-      <label htmlFor="coin-select">Select a coin:</label>
-      <select id="coin-select" value={coin} onChange={handleCoinChange}>
+      <label className="coin-select-label" htmlFor="coin-select">Select a coin:</label>
+      <select className="coin-select" id="coin-select" value={coin} onChange={handleCoinChange}>
         <option value="bitcoin">Bitcoin</option>
         <option value="ethereum">Ethereum</option>
         <option value="tether">Tether</option>
@@ -159,8 +172,8 @@ const CryptoChart = () => {
       </select>
 
       {/* Time interval select input */}
-      <label htmlFor="time-interval-select">Select a time interval:</label>
-      <select
+      <label className="time-int-label" htmlFor="time-interval-select">Select a time interval:</label>
+      <select className="time-int-select"
         id="time-interval-select"
         value={timeInterval}
         onChange={handleTimeIntervalChange}
