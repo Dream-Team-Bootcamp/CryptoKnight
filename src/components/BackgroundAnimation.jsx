@@ -2,6 +2,7 @@
 import { useCallback } from "react";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
+import "../assets/styles/BackgroundAnimation.css";
 
 // Log a message to the console
 console.log("Hello, nosy! We don't make mistakes.")
@@ -22,9 +23,10 @@ const App = () => {
     // Return the Particles component with specified options and callbacks
     return (
         <Particles
-            id="tsparticles"
-            init={particlesInit}
-            loaded={particlesLoaded}
+        id="tsparticles"
+        className="particles-bg"
+        init={particlesInit}
+        loaded={particlesLoaded}
             options={{
                 // Specify background color
                 background: {
@@ -102,9 +104,9 @@ const App = () => {
                 // Detect retina displays
                 detectRetina: true,
             }}
-        />
-    );
-};
-
-// Export the App component
-export default App;
+            />
+            );
+          };
+          
+          // Export the App component
+          export default App;

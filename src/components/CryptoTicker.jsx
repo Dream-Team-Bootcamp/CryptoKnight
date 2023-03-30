@@ -1,46 +1,146 @@
-// Import necessary dependencies
-import React, { useState, useCallback, useEffect } from 'react';
-import '../assets/styles/CryptoTicker.css'; // Import CSS styles
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import styled from '@emotion/styled';
 
-// Define CryptoTicker functional component
+const TickerContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Rubik', sans-serif;
+  overflow: visible;
+`;
+
+
+const InnerTicker = styled(motion.div)`
+    display: flex;
+    align-items: center;
+    width: 100%;
+`;
+
+const CoinsContainer = styled.div`
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+
+  /* hide scrollbar */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox scrollbar */
+  scrollbar-width: none;
+`;
+
+
+const Coin = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+    cursor: pointer;
+`;
+
+const CoinLogo = styled.img`
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+`;
+
+const CoinName = styled.span`
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    white-space: nowrap;
+`;
+
+const CoinPrice = styled.span`
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: ${(props) => (props.isUp ? 'green' : 'red')};
+`;
+
+const CoinTooltip = styled(motion.div)`
+    display: flex-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: black;
+    color: green;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: auto;
+    height: auto;
+    font-size: 12px;
+`;
+
+
+const CoinPercentage = styled.span`
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: ${(props) => (props.isUp ? 'green' : 'red')};
+`;
+
+const Separator = styled.span`
+    margin: 0 5px;
+`;
+
 const CryptoTicker = () => {
-    // Define state variables using useState hook
-    const [coins, setCoins] = useState([]); // Array of coins
-    const [isDataLoaded, setIsDataLoaded] = useState(false); // Boolean value for data loading
-    const [isTickerPaused, setIsTickerPaused] = useState(false); // Boolean value for ticker pause state
-    const [activeCoin, setActiveCoin] = useState(null); // Active coin object
+    const [coins, setCoins] = useState([]);
+    const [activeCoin, setActiveCoin] = useState(null);
+    const coinsContainerRef = useRef(null);
     const [tooltipPosition, setTooltipPosition] = useState({
-        // Position of the tooltip
         top: 0,
         left: 0,
         width: 0,
         height: 'auto',
     });
-    const [timeoutId, setTimeoutId] = useState(null); // ID for the timeout function
 
-    // Fetch coin data from the API using the useCallback hook
     const fetchCoins = useCallback(async () => {
         const response = await fetch(
             'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
         );
         const data = await response.json();
         setCoins(data);
-        setIsDataLoaded(true);
     }, []);
 
-    // Use useEffect hook to fetch coin data and set an interval to update it
     useEffect(() => {
         fetchCoins();
         const interval = setInterval(fetchCoins, 60000);
         return () => clearInterval(interval);
     }, [fetchCoins]);
 
-    // Determine if a coin's price is up or down
+    useEffect(() => {
+        const coinsContainer = coinsContainerRef.current;
+        if (coinsContainer) {
+            const scrollInterval = setInterval(() => {
+                if (!activeCoin) {
+                    if (coinsContainer.scrollLeft >= coinsContainer.scrollWidth - coinsContainer.clientWidth) {
+                        // Reset scroll position when reaching the end
+                        coinsContainer.scrollLeft = 0;
+                    } else {
+                        coinsContainer.scrollLeft += 20;
+                    }
+                }
+            }, 10);
+
+            return () => clearInterval(scrollInterval);
+        }
+    }, [activeCoin]);
+
     const isPriceUp = (coin) => {
         return coin.price_change_percentage_24h > 0;
     };
 
-    // Format coin price based on its value
     const formatPrice = (price) => {
         if (price >= 1) {
             return `$${price.toFixed(2)}`;
@@ -49,115 +149,274 @@ const CryptoTicker = () => {
         }
     };
 
-    // Open a new tab to display a coin's chart on coingecko.com
     const openCoinChart = (coinName) => {
         window.open(`https://www.coingecko.com/en/coins/${coinName.toLowerCase()}`, '_blank');
     };
 
-    // Set tooltip position and active coin on mouse enter
     const handleMouseEnter = (coin, e) => {
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-            setTimeoutId(null);
-        }
         setActiveCoin(coin.id);
-        setIsTickerPaused(true);
         const target = e.target.closest('.coin');
-        const targetRect = target.getBoundingClientRect();
-        const tooltipWidth = target.offsetWidth;
-        const tooltipLeft = targetRect.left;
-        const tooltipTop = targetRect.bottom + window.scrollY;
-        setTooltipPosition({
-            top: tooltipTop,
-            left: tooltipLeft,
-            width: tooltipWidth,
-            height: 'auto', // reset the height to auto on mouse enter
-        });
-    };
+        if (target) {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const tooltipWidth = viewportWidth / 2;
+            const tooltipTop = viewportHeight / 2;
+            const tooltipLeft = (viewportWidth - tooltipWidth) / 2;
 
-    // Clear timeout and reset ticker pause and active coin on mouse leave
-    const handleMouseLeave = (e) => {
-        if (e.relatedTarget && e.relatedTarget.classList && e.relatedTarget.classList.contains('coin-tooltip')) {
-            return;
+            setTooltipPosition({
+                top: tooltipTop,
+                left: tooltipLeft,
+                width: tooltipWidth,
+                height: 'auto',
+            });
         }
-        const id = setTimeout(() => {
-            setIsTickerPaused(false);
-            setActiveCoin(null);
-        }, 500);
-        setTimeoutId(id);
     };
 
-    // Return JSX for CryptoTicker component
+
+
+    const handleMouseLeave = () => {
+        setActiveCoin(null);
+    };
+
+    const tooltipAnimation = {
+        hidden: { opacity: 0, scaleY: 0.5 },
+        visible: { opacity: 1, scaleY: 1 },
+    };
+
     return (
-        <div className={`crypto-ticker ${isDataLoaded ? 'loaded' : ''}`} onMouseLeave={handleMouseLeave}>
-            {/* Render ticker items */}
-            <div className="inner-ticker" style={{ animationPlayState: isTickerPaused ? 'paused' : 'running' }}>
-                {coins.map((coin) => (
-                    <div
-                        key={coin.id}
-                        className="coin"
-                        onClick={() => openCoinChart(coin.name)}
-                        style={{ cursor: 'pointer' }}
-                        onMouseEnter={(e) => handleMouseEnter(coin, e)}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        <img src={coin.image} alt={coin.name} className="coin-logo" />
-                        <span className="coin-name">{coin.name}</span>
-                        <span className={`coin-price ${isPriceUp(coin) ? 'green' : 'red'}`}>
-                            {formatPrice(coin.current_price)} ({coin.price_change_percentage_24h.toFixed(2)}%)
-                        </span>
-                    </div>
-                ))}
-            </div>
-            {/* Render ticker paused overlay */}
-            {isTickerPaused && <div className="ticker-paused-overlay">Paused</div>}
-            {/* Render tooltip for active coin */}
-            {coins.map((coin) => (
-                activeCoin === coin.id && (
-                    <div
-                        key={coin.id}
-                        className="coin-tooltip"
-                        style={{
-                            display: 'block',
-                            position: 'absolute',
-                            top: tooltipPosition.top,
-                            left: tooltipPosition.left,
-                            width: tooltipPosition.width,
-                            height: tooltipPosition.height, // set the height to the dynamic value
-                        }}
-                        onMouseEnter={() => {
-                            if (timeoutId) {
-                                clearTimeout(timeoutId);
-                                setTimeoutId(null);
-                            }
-                            setIsTickerPaused(true);
-                        }}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {/* Define tooltip values */}
-                        <p>Market Cap: {coin.market_cap.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                        <p>Total Volume: {coin.total_volume.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                        <p>24h High: {formatPrice(coin.high_24h)}</p>
-                        <p>24h Low: {formatPrice(coin.low_24h)}</p>
-                        <p>24h Open: {formatPrice(coin.current_price - coin.price_change_24h)}</p>
-                        <p>24h Close: {formatPrice(coin.current_price)}</p>
-                        <p>Market Cap Rank: {coin.market_cap_rank}</p>
-                        <p>Circulating Supply: {coin.circulating_supply.toLocaleString('en-US')}</p>
-                        <p>Total Supply: {coin.total_supply ? coin.total_supply.toLocaleString('en-US') : 'N/A'}</p>
-                        <p>Max Supply: {coin.max_supply ? coin.max_supply.toLocaleString('en-US') : 'N/A'}</p>
-                        <p>ATH: {formatPrice(coin.ath)}</p>
-                        <p>ATH Date: {new Date(coin.ath_date).toLocaleDateString()}</p>
-                        <p>ATL: {formatPrice(coin.atl)}</p>
-                        <p>ATL Date: {new Date(coin.atl_date).toLocaleDateString()}</p>
-                        <p>Market Cap Change (24h): {coin.market_cap_change_percentage_24h}%</p>
-                        <p>All Time High Change (24h): {coin.ath_change_percentage}%</p>
-                        <p>All Time Low Change (24h): {coin.atl_change_percentage}%</p>
-                        <p>Last Updated: {new Date(coin.last_updated).toLocaleString()}</p>
-                    </div>
-                )
-            ))}
-        </div>
+        <TickerContainer>
+            <InnerTicker>
+                <CoinsContainer ref={coinsContainerRef}>
+                    {coins.map((coin) => (
+                        <Coin
+                            key={coin.id}
+                            onClick={() => openCoinChart(coin.name)}
+                            onMouseEnter={(e) => handleMouseEnter(coin, e)}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <CoinLogo src={coin.image} alt={coin.name} />
+                            <CoinName>{coin.name}</CoinName>
+                            <Separator>-</Separator>
+                            <CoinPrice isUp={isPriceUp(coin)}>
+                                {formatPrice(coin.current_price)}
+                            </CoinPrice>
+                            <Separator>-</Separator>
+                            <CoinPercentage isUp={isPriceUp(coin)}>
+                                {coin.price_change_percentage_24h.toFixed(2)}%
+                            </CoinPercentage>
+                        </Coin>
+                    ))}
+                </CoinsContainer>
+            </InnerTicker>
+            <AnimatePresence>
+                {coins.map(
+                    (coin) =>
+                        activeCoin === coin.id && (
+                            <CoinTooltip
+                                key={coin.id}
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                                variants={tooltipAnimation}
+                                transition={{ duration: 0.2 }}
+                                style={{
+                                    top: `${tooltipPosition.top}px`,
+                                    left: `${tooltipPosition.left}px`,
+                                    width: 'auto',
+                                    height: '',
+                                }}
+                            >
+                                <p>Market Cap: {coin.market_cap.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                                <p>Total Volume: {coin.total_volume.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                                <p>24h High: {formatPrice(coin.high_24h)}</p>
+                                <p>24h Low: {formatPrice(coin.low_24h)}</p>
+                                <p>24h Open: {formatPrice(coin.current_price - coin.price_change_24h)}</p>
+                                <p>24h Close: {formatPrice(coin.current_price)}</p>
+                                <p>Market Cap Rank: {coin.market_cap_rank}</p>
+                                <p>Circulating Supply: {coin.circulating_supply.toLocaleString('en-US')}</p>
+                                <p>Total Supply: {coin.total_supply ? coin.total_supply.toLocaleString('en-US') : 'N/A'}</p>
+                                <p>Max Supply: {coin.max_supply ? coin.max_supply.toLocaleString('en-US') : 'N/A'}</p>
+                                <p>ATH: {formatPrice(coin.ath)}</p>
+                                <p>ATH Date: {new Date(coin.ath_date).toLocaleDateString()}</p>
+                                <p>ATL: {formatPrice(coin.atl)}</p>
+                                <p>ATL Date: {new Date(coin.atl_date).toLocaleDateString()}</p>
+                                <p>Market Cap Change (24h): {coin.market_cap_change_percentage_24h}%</p>
+                                <p>All Time High Change (24h): {coin.ath_change_percentage}%</p>
+                                <p>All Time Low Change (24h): {coin.atl_change_percentage}%</p>
+                                <p>Last Updated: {new Date(coin.last_updated).toLocaleString()}</p>
+
+                            </CoinTooltip>
+                        )
+                )}
+            </AnimatePresence>
+        </TickerContainer>
     );
 };
 
 export default CryptoTicker;
+
+
+
+// // Import necessary dependencies
+// import React, { useState, useCallback, useEffect } from 'react';
+// import '../assets/styles/CryptoTicker.css'; // Import CSS styles
+
+// // Define CryptoTicker functional component
+// const CryptoTicker = () => {
+//     // Define state variables using useState hook
+//     const [coins, setCoins] = useState([]); // Array of coins
+//     const [isDataLoaded, setIsDataLoaded] = useState(false); // Boolean value for data loading
+//     const [isTickerPaused, setIsTickerPaused] = useState(false); // Boolean value for ticker pause state
+//     const [activeCoin, setActiveCoin] = useState(null); // Active coin object
+//     const [tooltipPosition, setTooltipPosition] = useState({
+//         // Position of the tooltip
+//         top: 0,
+//         left: 0,
+//         width: 0,
+//         height: 'auto',
+//     });
+//     const [timeoutId, setTimeoutId] = useState(null); // ID for the timeout function
+
+//     // Fetch coin data from the API using the useCallback hook
+//     const fetchCoins = useCallback(async () => {
+//         const response = await fetch(
+//             'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+//         );
+//         const data = await response.json();
+//         setCoins(data);
+//         setIsDataLoaded(true);
+//     }, []);
+
+//     // Use useEffect hook to fetch coin data and set an interval to update it
+//     useEffect(() => {
+//         fetchCoins();
+//         const interval = setInterval(fetchCoins, 60000);
+//         return () => clearInterval(interval);
+//     }, [fetchCoins]);
+
+//     // Determine if a coin's price is up or down
+//     const isPriceUp = (coin) => {
+//         return coin.price_change_percentage_24h > 0;
+//     };
+
+//     // Format coin price based on its value
+//     const formatPrice = (price) => {
+//         if (price >= 1) {
+//             return `$${price.toFixed(2)}`;
+//         } else {
+//             return `$${price.toFixed(6)}`;
+//         }
+//     };
+
+//     // Open a new tab to display a coin's chart on coingecko.com
+//     const openCoinChart = (coinName) => {
+//         window.open(`https://www.coingecko.com/en/coins/${coinName.toLowerCase()}`, '_blank');
+//     };
+
+//     // Set tooltip position and active coin on mouse enter
+//     const handleMouseEnter = (coin, e) => {
+//         if (timeoutId) {
+//             clearTimeout(timeoutId);
+//             setTimeoutId(null);
+//         }
+//         setActiveCoin(coin.id);
+//         setIsTickerPaused(true);
+//         const target = e.target.closest('.coin');
+//         const targetRect = target.getBoundingClientRect();
+//         const tooltipWidth = target.offsetWidth;
+//         const tooltipLeft = targetRect.left;
+//         const tooltipTop = targetRect.bottom + window.scrollY;
+//         setTooltipPosition({
+//             top: tooltipTop,
+//             left: tooltipLeft,
+//             width: tooltipWidth,
+//             height: 'auto', // reset the height to auto on mouse enter
+//         });
+//     };
+
+//     // Clear timeout and reset ticker pause and active coin on mouse leave
+//     const handleMouseLeave = (e) => {
+//         if (e.relatedTarget && e.relatedTarget.classList && e.relatedTarget.classList.contains('coin-tooltip')) {
+//             return;
+//         }
+//         const id = setTimeout(() => {
+//             setIsTickerPaused(false);
+//             setActiveCoin(null);
+//         }, 500);
+//         setTimeoutId(id);
+//     };
+
+//     // Return JSX for CryptoTicker component
+//     return (
+//         <div className={`crypto-ticker ${isDataLoaded ? 'loaded' : ''}`} onMouseLeave={handleMouseLeave}>
+//             {/* Render ticker items */}
+//             <div className="inner-ticker" style={{ animationPlayState: isTickerPaused ? 'paused' : 'running' }}>
+//                 {coins.map((coin) => (
+//                     <div
+//                         key={coin.id}
+//                         className="coin"
+//                         onClick={() => openCoinChart(coin.name)}
+//                         style={{ cursor: 'pointer' }}
+//                         onMouseEnter={(e) => handleMouseEnter(coin, e)}
+//                         onMouseLeave={handleMouseLeave}
+//                     >
+//                         <img src={coin.image} alt={coin.name} className="coin-logo" />
+//                         <span className="coin-name">{coin.name}</span>
+//                         <span className={`coin-price ${isPriceUp(coin) ? 'green' : 'red'}`}>
+//                             {formatPrice(coin.current_price)} ({coin.price_change_percentage_24h.toFixed(2)}%)
+//                         </span>
+//                     </div>
+//                 ))}
+//             </div>
+//             {/* Render ticker paused overlay */}
+//             {isTickerPaused && <div className="ticker-paused-overlay">Paused</div>}
+//             {/* Render tooltip for active coin */}
+//             {coins.map((coin) => (
+//                 activeCoin === coin.id && (
+//                     <div
+//                         key={coin.id}
+//                         className="coin-tooltip"
+//                         style={{
+//                             display: 'block',
+//                             position: 'absolute',
+//                             top: tooltipPosition.top,
+//                             left: tooltipPosition.left,
+//                             width: tooltipPosition.width,
+//                             height: tooltipPosition.height, // set the height to the dynamic value
+//                         }}
+//                         onMouseEnter={() => {
+//                             if (timeoutId) {
+//                                 clearTimeout(timeoutId);
+//                                 setTimeoutId(null);
+//                             }
+//                             setIsTickerPaused(true);
+//                         }}
+//                         onMouseLeave={handleMouseLeave}
+//                     >
+//                         {/* Define tooltip values */}
+//                         <p>Market Cap: {coin.market_cap.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+//                         <p>Total Volume: {coin.total_volume.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+//                         <p>24h High: {formatPrice(coin.high_24h)}</p>
+//                         <p>24h Low: {formatPrice(coin.low_24h)}</p>
+//                         <p>24h Open: {formatPrice(coin.current_price - coin.price_change_24h)}</p>
+//                         <p>24h Close: {formatPrice(coin.current_price)}</p>
+//                         <p>Market Cap Rank: {coin.market_cap_rank}</p>
+//                         <p>Circulating Supply: {coin.circulating_supply.toLocaleString('en-US')}</p>
+//                         <p>Total Supply: {coin.total_supply ? coin.total_supply.toLocaleString('en-US') : 'N/A'}</p>
+//                         <p>Max Supply: {coin.max_supply ? coin.max_supply.toLocaleString('en-US') : 'N/A'}</p>
+//                         <p>ATH: {formatPrice(coin.ath)}</p>
+//                         <p>ATH Date: {new Date(coin.ath_date).toLocaleDateString()}</p>
+//                         <p>ATL: {formatPrice(coin.atl)}</p>
+//                         <p>ATL Date: {new Date(coin.atl_date).toLocaleDateString()}</p>
+//                         <p>Market Cap Change (24h): {coin.market_cap_change_percentage_24h}%</p>
+//                         <p>All Time High Change (24h): {coin.ath_change_percentage}%</p>
+//                         <p>All Time Low Change (24h): {coin.atl_change_percentage}%</p>
+//                         <p>Last Updated: {new Date(coin.last_updated).toLocaleString()}</p>
+//                     </div>
+//                 )
+//             ))}
+//         </div>
+//     );
+// };
+
+// export default CryptoTicker;

@@ -1,19 +1,31 @@
 import React from 'react';
 import './App.css';
 import CryptoTicker from './components/CryptoTicker';
-import ChatBot from './components/ChatBot';
-import CryptoDisplay from './components/CryptoDisplay';
-import ParticlesBg from './components/BackgroundAnimation';
+import BackgroundAnimation from './components/BackgroundAnimation';
+import Frank from './components/Frank';
+// import CryptoChart from "./components/CryptoChart";
+import NavBar from './components/Navbar';
+// import Home from './components/Placeholder1';
+import CryptoChart from './components/CryptoChart';
+import Contact from './components/Placeholder3';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <ParticlesBg type="circle" bg={true} />
-      <div className="content" style={{ zIndex: 1 }}></div>
+    <Router>
+      <BackgroundAnimation />
       <CryptoTicker />
-      <CryptoDisplay />
-      <ChatBot />
-    </div>
+      <NavBar />
+      
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/about" element={<CryptoChart />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Frank />
+      
+      {/* <CryptoChart /> */}
+    </Router>
   );
 }
 
