@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
-// import styles from "../assets/styles/NewsFrame.module.css";
 import styles from "../assets/styles/News.module.css";
 import fetchCryptoPanicData from "../assets/functions/fetchNews.js";
 import newsOptionChoices from "../assets/data/newsOptionChoices.js";
-import classNames from "classnames";
 import styled from '@emotion/styled'; // Importing a styled-component library
 import { motion }  from "framer-motion";
 import DrawOptionsContainer from './OptionsContainer';
 import { renderNewsItem } from "./RenderNewsItems";
-import CardMaker from "./CardMaker";
-import CurrencyList from "./CurrencyList"
-
 
 const NewsFrame = () => {
-  // console.log("newsOptionChoices at start of newsframe function: ", newsOptionChoices);
-
   const [newsItems, setNewsItems] = useState([]);
   const [newsOptions, setNewsOptions] = useState({
     filter: { name: "Hot", description: "Brings articles that are currently popular", value: "hot" },
@@ -104,92 +97,4 @@ flex;
     margin: 10px;
     border: 1px solid  #50ae55;
     border-radius: 10px;
-`;
-
-// Define styled component for the chatbot container
-const placehold = styled(motion.div)`
-  position: fixed;
-  // background-color: rgba(34, 34, 34, 0.9); 
-  bottom: ${({ size }) => (size === 'small' ? '0px' : size === 'medium' ? '10%' : '0')};
-  right: ${({ size }) => (size === 'small' ? '-7px' : size === 'medium' ? '10%' : '0')};
-  width: ${({ size }) => (size === 'small' ? '300px' : size === 'medium' ? '80%' : '100%')};
-  height: ${({ size }) => (size === 'small' ? '400px' : size === 'medium' ? '80%' : '100%')};
-  border-radius: ${({ size }) => (size === 'small' ? '10px' : '0')};
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: ${({ size }) => (size === 'maximized' ? '9999' : 'auto')}; 
-`;
-
-const NewsContainer = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  overflow: auto;
-`;
-
-const OptionsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.5rem;
-`;
-
-const KindsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const CurrenciesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const CurrencyCardOption = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem;
-  cursor: pointer;
-  border: 1px solid transparent;
-
-  &.selected {
-    border-color: white;
-  }
-
-  &:hover {
-    border-color: white;
-  }
-
-  img {
-    height: 2rem;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-const CustomCurrencyInput = styled.input`
-  margin-left: 8px;
-  padding: 4px;
-  font-size: 16px;
-  background-color: transparent;
-  color: white;
-  border: none;
-  border-bottom: 1px solid white;
-`;
-
-const CustomCurrencyButton = styled.button`
-  margin-left: 8px;
-  padding: 4px 8px;
-  font-size: 16px;
-  color: white;
-  background-color: #0048ba;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #003c8a;
-  }
 `;

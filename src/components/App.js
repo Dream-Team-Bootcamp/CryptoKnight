@@ -7,6 +7,7 @@ import NavBar from "./components/Navbar";
 import CryptoChart from "./components/CryptoChart";
 import Knightly from "./components/Knightly";
 import WordSoup from "./components/WordSoup";
+import NewsFrame from "./components/NewsFrame";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ConnectWeb3 from "./components/ConnectWeb3";
 

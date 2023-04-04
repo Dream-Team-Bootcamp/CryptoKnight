@@ -26,19 +26,3 @@ async function fetchCryptoPanicData(options = {}) {
 
 export default fetchCryptoPanicData;
 
-
-//         const params = { ...defaultParams, ...options };
-//         console.log(params);
-//         const response = await axios.get(cryptoPanicEndpoint, { params });
-//         console.log("Response: " + response);
-//         console.log(response.data);
-//         const newsData = response.data.results;
-//         console.log("NEWS DATA: " + newsData);
-//         return newsData;
-//     } catch (error) {
-//         console.error('Error fetching CryptoPanic data:', error);
-//     }
-// }
-
-// export default fetchCryptoPanicData;
-

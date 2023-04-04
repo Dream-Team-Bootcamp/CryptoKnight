@@ -1,4 +1,4 @@
-import { motion }  from "framer-motion";
+import motion from "framer-motion";
 import styles from "../assets/styles/RenderNewsItems.module.css";
 
 export const renderNewsItem = (item) => {
