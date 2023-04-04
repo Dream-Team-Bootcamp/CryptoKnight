@@ -6,6 +6,7 @@ import Frank from "./components/Frank";
 import NavBar from "./components/Navbar";
 import CryptoChart from "./components/CryptoChart";
 import Contact from "./components/Placeholder3";
+import NewsFrame from "./components/NewsFrame";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/about" element={<CryptoChart />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/news" element={<NewsFrame />} />
         </Routes>
         <Frank />
       </WagmiConfig>
